@@ -1,7 +1,7 @@
 # Octuple Cart-Pole: an open-source, code-reproducible n=8 cart swing-up + balance artifact
 
 Fourth rung this week: this repo extends
-[quintuple](https://github.com/nzalexgarciagil-ctrl/quintuple-cartpole) (n=5),
+[quintuple](https://github.com/eight-state/quintuple-cartpole) (n=5),
 [sextuple](https://github.com/eight-state/sextuple-cartpole) (n=6) and
 [septuple](https://github.com/eight-state/septuple-cartpole) (n=7) to
 **eight links** on a single 150 N cart. The nominal-generation method is the
@@ -30,7 +30,7 @@ predicate are byte-for-byte the n=5/6/7 releases'.
 > claim is made; per-IC planning compute ranges minutes to hours (see
 > `solve_s` in the JSONs).
 
-![octuple swing-up + balance](results/demo_octuple.gif)
+![n=8-link cart-pole swing-up and balance](results/demo_octuple.gif)
 
 ## Headline numbers
 
@@ -175,4 +175,4 @@ docs/METHOD.md, docs/PRIOR_ART.md
 
 ## License
 
-MIT.
+MIT (see [LICENSE](LICENSE)). © 2026 Alex Garcia Gil.
