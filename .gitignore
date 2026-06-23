@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+# Regenerated artifacts (the shipped validated ones are tracked explicitly).
+results/*.log
+results/demo_sextuple_plots.png
+results/demo_sextuple_force_zoom.png
+
+# stray local logs
+*.log
+MY_*.log
