@@ -10,7 +10,7 @@ runnable, validated code, not the feat. The closed loop is validated in
 a saturated simulator and reproduces from a clean clone with one-time `uv sync`
 setup followed by a single run command.
 
-![quintuple swing-up + balance](results/demo_quintuple.gif)
+![n=5-link cart-pole swing-up and balance](results/demo_quintuple.gif)
 
 > **What this is.** The **first public, code-reproducible n=5 cart-pole
 > swing-up-and-balance artifact**. It ships a saved, validated nominal trajectory
