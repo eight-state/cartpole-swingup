@@ -1,7 +1,7 @@
 # Method: the n=6 deltas
 
 The full method is documented in the n=5 release at
-https://github.com/nzalexgarciagil-ctrl/quintuple-cartpole. n=6 uses the same
+https://github.com/eight-state/quintuple-cartpole. n=6 uses the same
 three stages: Glück/Kugi exact input-output inversion to get an in-basin
 swing-up plan, a direct-collocation continuity polish to remove the boundary
 jumps, and whole-trajectory TVLQR for the closed loop. The n=5 METHOD covers why

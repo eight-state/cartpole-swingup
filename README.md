@@ -1,7 +1,7 @@
 # Sextuple Cart-Pole: an open-source, code-reproducible n=6 cart swing-up + balance artifact
 
 This repo extends the n=5 release at
-https://github.com/nzalexgarciagil-ctrl/quintuple-cartpole to six links. It uses
+https://github.com/eight-state/quintuple-cartpole to six links. It uses
 the same method (Glück/Kugi exact inversion, collocation polish, whole-trajectory
 TVLQR) and the same runtime, documented in full there. This README and
 [docs/METHOD.md](docs/METHOD.md) cover only what is new at n=6: the cc-iLQG 1 ms
@@ -9,7 +9,7 @@ refinement that produced the shipped nominal, the 6-link nominal and its numbers
 and the closed-loop validation. The closed loop reproduces from a clean clone
 after a one-time `uv sync` followed by a single run command.
 
-![sextuple swing-up + balance](results/demo_sextuple.gif)
+![n=6-link cart-pole swing-up and balance](results/demo_sextuple.gif)
 
 *(Demo-rollout note: the unperturbed demo above peaks at 43.9 N, higher
 than the 38.6 N max over the perturbed validation runs, because the demo's
@@ -44,7 +44,7 @@ The full method (why general-purpose trajectory optimization fails on the
 unstable non-minimum-phase plant, the Glück/Kugi exact input-output inversion,
 the stable multiple-shooting BVP with n-continuation, the direct-collocation
 continuity polish, and whole-trajectory TVLQR) is documented in the n=5 repo at
-https://github.com/nzalexgarciagil-ctrl/quintuple-cartpole. The `src/cartpole_race`
+https://github.com/eight-state/quintuple-cartpole. The `src/cartpole_race`
 runtime here is the same dynamics and controller spine. n=6 is reached by
 continuation from the n=5 nominal, with one new step: a native-compiled cc-iLQG
 refinement that takes a 2.5 ms collocation seed to a bit-exact 1 ms nominal in
