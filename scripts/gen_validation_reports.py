@@ -28,6 +28,7 @@ import os
 import platform
 import subprocess
 import sys
+from collections import OrderedDict
 from pathlib import Path
 
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
@@ -163,8 +164,16 @@ def main() -> int:
               f"max|x|={st['max_abs_x_over_runs']:.3f}m  -> {out.name}",
               flush=True)
 
-    total_trials = sum(r["n_trials"] for r in leg_reports)
-    total_success = sum(r["n_success"] for r in leg_reports)
+    # The README/METHOD no-pooling rule: the two perturbation-amplitude legs
+    # (sigma=0.02 and sigma=0.10) are distinct claims and MUST NOT be summed into
+    # one pooled success count. So we report success counts grouped by sigma and
+    # never emit an all-legs pooled total.
+    by_sigma: "OrderedDict[str, dict]" = OrderedDict()
+    for r in leg_reports:
+        key = f"{r['sigma']:.2f}"
+        g = by_sigma.setdefault(key, {"trials": 0, "success": 0})
+        g["trials"] += r["n_trials"]
+        g["success"] += r["n_success"]
     banked = [r for r in leg_reports if r["leg"].startswith("banked")]
     banked_trials = sum(r["n_trials"] for r in banked)
     banked_success = sum(r["n_success"] for r in banked)
@@ -179,8 +188,9 @@ def main() -> int:
         "monodromy_rho": rho,
         "predicate": PREDICATE,
         "totals": {
-            "all_legs_trials": total_trials,
-            "all_legs_success": total_success,
+            # Per-amplitude success counts, reported separately. The README
+            # forbids merging these into a single pooled number.
+            "by_sigma": by_sigma,
             "banked_two_seed_trials": banked_trials,
             "banked_two_seed_success": banked_success,
             "max_abs_force_over_all_legs": max(
@@ -195,13 +205,21 @@ def main() -> int:
                  if r["leg"] == "stress_seed2024"), 0),
             "max_abs_x_over_all_legs": max(
                 r["max_abs_x"] for r in leg_reports),
+            "no_pool_note": (
+                "Per the README/METHOD no-pooling rule, the two "
+                "perturbation-amplitude legs (sigma=0.02 and sigma=0.10) are "
+                "reported separately under by_sigma and are never summed into a "
+                "single pooled success count."),
         },
         "legs": leg_reports,
     }
     out = RESULTS / "combined_validation_report.json"
     out.write_text(json.dumps(combined, indent=2))
+    by_sigma_str = ", ".join(
+        f"sigma={k} {g['success']}/{g['trials']}"
+        for k, g in by_sigma.items())
     print(f"\ncombined: banked {banked_success}/{banked_trials}, "
-          f"all legs {total_success}/{total_trials}, "
+          f"{by_sigma_str} (reported separately, never pooled), "
           f"stress saturated ICs = "
           f"{combined['totals']['stress_n_saturated_ics']}/"
           f"{combined['totals']['stress_n_trials']}, "

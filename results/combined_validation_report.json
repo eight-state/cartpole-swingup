@@ -18,15 +18,24 @@
     "note": "all n links within tolerances held continuously for the final 5 s; force and track respected over the WHOLE rollout"
   },
   "totals": {
-    "all_legs_trials": 112,
-    "all_legs_success": 112,
+    "by_sigma": {
+      "0.02": {
+        "trials": 88,
+        "success": 88
+      },
+      "0.10": {
+        "trials": 24,
+        "success": 24
+      }
+    },
     "banked_two_seed_trials": 64,
     "banked_two_seed_success": 64,
     "max_abs_force_over_all_legs": 60.0,
     "max_abs_force_demanded_over_all_legs": 139.89818484261536,
     "stress_n_saturated_ics": 11,
     "stress_n_trials": 24,
-    "max_abs_x_over_all_legs": 4.075118855732107
+    "max_abs_x_over_all_legs": 4.075118855732107,
+    "no_pool_note": "Per the README/METHOD no-pooling rule, the two perturbation-amplitude legs (sigma=0.02 and sigma=0.10) are reported separately under by_sigma and are never summed into a single pooled success count."
   },
   "legs": [
     {
