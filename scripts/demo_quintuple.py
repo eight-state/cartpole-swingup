@@ -113,7 +113,10 @@ def run_demo(make_plots: bool = True, make_animation: bool = True):
             tail += 1
         else:
             break
-    hold_achieved = tail * control_dt
+    # Exact 5.0 s hold: elapsed is (tail-1) ticks, matching the gate
+    # (rollout.simulate_handoff / static_hold_rollout), not the 4.999 s of
+    # tail * control_dt (5000 in-set samples).
+    hold_achieved = max(0, tail - 1) * control_dt
     peak_force = float(np.max(np.abs(u_log)))
     track_ok = bool(np.all(np.abs(x_log[:, 0]) <= track))
     force_ok = bool(peak_force <= FORCE_BOUND + 1e-6)
