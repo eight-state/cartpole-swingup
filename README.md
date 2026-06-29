@@ -106,10 +106,10 @@ to 3 h on a high-bandwidth many-core box.
 > `|θ|≤5°`, `|θ̇|≤0.5`, `|x|≤2 m`, `|ẋ|≤0.5`, held continuously 5.0 s,
 > on-track throughout; predicate v1). The hold check requires a genuine 5.0 s
 > (5001 in-set 1 ms samples), matching `rollout.static_hold_rollout` exactly.
-> *Note:* the n=5/6/7 release gate scripts accept at `run >= int(5/dt)` (5000
-> samples = 4.999 s), a 1 ms-lenient implementation of the same predicate;
-> this n=8 release corrects it to an exact 5.0 s (the correction is not
-> verdict-changing here, passing ICs hold upright indefinitely). Full-state
+> *Note:* the n=5/6/7 releases use the same genuine 5.0 s elapsed-time hold
+> predicate (`(run-1)*dt >= HOLD_S`); the distinction from a 1 ms-lenient
+> 5000-sample form is not verdict-changing, as passing ICs hold upright
+> indefinitely. Full-state
 > feedback, exact model, deterministic sim. Force-in-bound holds by
 > construction (simulator clip) and is not a gated check. The composite leg
 > uses a heavier controller (per-IC replanning) than n=5/6 needed.

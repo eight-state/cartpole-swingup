@@ -106,12 +106,9 @@ alone does not reach the headline, the per-IC replanning does.
 **Hold-predicate correction (vs the sibling releases).** The gate's continuous
 5 s hold is measured as elapsed time `(run-1)*dt`, identical to
 `rollout.static_hold_rollout`, so a pass requires a genuine 5.0 s (5001 in-set
-1 ms samples). The n=5/6/7 release gate scripts accept at `run >= int(5/dt)`
-(5000 samples = 4.999 s), a 1 ms-lenient implementation of the same predicate v1;
-this n=8 release corrects it. The correction is not verdict-changing at n=8
+1 ms samples). The n=5/6/7 releases use the same genuine 5.0 s elapsed-time hold predicate. The correction is not verdict-changing at n=8
 (passing ICs hold upright indefinitely under the contractive discrete TVLQR,
 rho=0.156), but the banked counts here are under the *exact* 5.0 s predicate.
-The same one-line fix should be back-ported to the n=5/6/7 release gates.
 
 Results are banked with full provenance (commit_sha + git_dirty + nominal
 sha256) in `results/clvalidate_n8_{composite,fixed}_seed{777,12345}.json`.
