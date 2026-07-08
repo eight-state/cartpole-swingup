@@ -1,0 +1,7 @@
+=== n=10 MS warm from n=9 traj: T=10.0 a_max=100.0 M=88 nsub=12 maxfev=250 NP=20 ===
+solve done nfev=250 cost=1.270e-01 wall=10500s
+[n=10 MS T=10.0 a_max=100.0 M=88] term(recon)=0.263deg term(node)=0.130deg rate=0.002 | peak|a|=24.6 m/s^2 peak|F|=83.1 N | OL_replay_term=129.6deg | CL_replay_term=176.44deg CL_maxdev=6343.6deg CL_peakF=150N max_defect=6.178deg clip=0/10000
+[n=10 MS T=10.0 a_max=100.0 M=88] saved nominal -> runs/r2/nom_n10_gluck.npz
+
+=== N10 MS RESULT ===
+{"n": 10, "T": 10.0, "a_max": 100.0, "M": 88, "term_recon_deg": 0.263, "term_node_deg": 0.1304, "termrate": 0.0018, "peak_accel": 24.63, "peak_force": 83.11, "replay_ol_termdeg": 129.572, "replay_ol_maxdev_deg": 3818.62, "replay_cl_termdeg": 176.445, "replay_cl_maxdev_deg": 6343.56, "replay_cl_peakF": 150.0, "max_1step_defect_deg": 6.1781, "n_force_clipped": 0, "force_bound": 150.0, "nfev": 250, "solve_s": 10500.0}
