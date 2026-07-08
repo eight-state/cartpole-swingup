@@ -104,7 +104,7 @@ claim unbounded robustness.
 
 The n=4 case (ρ=0.036, 64/64 at 60 N, peak ~24 N) was observed in development; no
 n=4 JSON is committed in this repo, so it is reported as a development observation,
-not a committed result. n=5 is closed-loop validated there (ρ=0.0293, 64/64). n=6
+not a committed result. n=5 is closed-loop validated there (ρ=0.0298, 64/64). n=6
 is this release: ρ=0.0270, 48/48, native 1 ms grid. The
 2→3→4 stages reproduced the published-style n=4 numbers exactly (n=2 0.81°/12.9 N,
 n=3 1.28°/24.3 N, n=4 0.091°/25.4 N), confirming the pipeline is unchanged across
