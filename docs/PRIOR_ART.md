@@ -4,7 +4,7 @@ This is the accounting behind the claim that this repo is, to our knowledge,
 the **first public n=7 cart-pole swing-up-and-balance artifact by any
 method**, and certainly the first open-source, code-reproducible one. The
 full prior-art tables for n=5 and n=6 (Glück 2013 hardware triple, Lam &
-Davison 2006 base-torque stabilization to n=7, the unverified quintuple
+Davison 2006 base-torque stabilization to n=7, the Ozana quintuple simulation
 video, Kotelovych 2024 Isaac Sim n=5 balance, yacine's 2026-06-09 public RL
 n=6 post) live in the sibling releases:
 
