@@ -14,7 +14,8 @@ MultiShoot solver (`nom_n10_gluck.npz`). ~2.9 h. Same recipe as every rung.
 ## 2. Polish: 4 ms `w_v` collocation, and the tight-exit lesson (`_n10_oneshot_wv.py`)
 
 2500-node, 4 ms RK4 collocation warm-started from the gluck seed, with the
-running velocity penalty `w_v = 1e-3` inherited from n=9. Converged:
+running velocity penalty carried over from n=9 (which used `w_v = 6e-4`), here
+tuned to `w_v = 1e-3`. Converged:
 RK4-4ms transcription defect **1.361e-07**, peak feedforward **35.97 N**,
 terminal **0.0115°**.
 

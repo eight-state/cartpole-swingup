@@ -9,7 +9,8 @@ node-boundary seam 8.195e-06). Closed-loop validation runs the REAL saturated
 plant at 1 ms with exact-ZOH discrete TVLQR (monodromy rho = 0.1042).
 
 The velocity penalty (`w_v = 1e-3`, a running Sum vel^2 cost in the collocation
-objective) is inherited from n=9; the ``t`` (tight) suffix marks the re-solve
+objective) carries over the idea from n=9 (which used `w_v = 6e-4`); the ``t``
+(tight) suffix marks the re-solve
 whose exit rule required defect < 1e-6 and dual < 5e-4. An earlier
 acceptable_tol=1e-4 shortcut left defect 5.6e-6 and the track blew through the
 stiff t~2.23 s window; the tightened re-solve fixed it. See docs/METHOD.md.

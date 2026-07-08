@@ -10,7 +10,8 @@ links** on a single 150 N cart. Nominal generation is the ladder stack (Glück
 MS continuation → 4 ms `w_v` collocation polish → densification → exact-ZOH
 discrete-time TVLQR); the perturbed-IC gate is the **same pre-roll architecture
 as n=9, with zero re-tuning**. Physics, saturated simulator, perturbation model,
-seeds, and the locked success predicate are byte-for-byte the n=5..9 releases'.
+and the locked success predicate are byte-for-byte the n=5..9 releases'. The
+gate runs the same three seeds as n=9 (12345, 777, 2024).
 
 > **The claim, stated narrowly.** From what our search found, this is the
 > first public, code-reproducible n=10 cart-pole swing-up-and-balance artifact

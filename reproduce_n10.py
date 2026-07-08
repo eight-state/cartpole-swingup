@@ -17,7 +17,8 @@ Fast mode (~1 min):
      (un-saturated) catch than n=9.
 
 Gate mode (--gate): the PRE-ROLL perturbed-IC gate at sigma=0.02 (identical
-  perturbation model, seeds, simulator, and predicate as the n=5..9 releases):
+  perturbation model, simulator, and predicate as the n=5..9 releases; the gate
+  runs the same three seeds as n=9 (12345, 777, 2024)):
   per-IC LQR-about-down pre-roll -> discrete TVLQR track the swing-up nominal
   -> static-LQR hold. NO per-IC NLP. Banked result: 24/24 on EACH of seeds
   12345, 777, 2024 (72/72), ~3.5 min/seed on 8 workers. Banked JSONs are in
