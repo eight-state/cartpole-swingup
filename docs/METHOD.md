@@ -220,9 +220,10 @@ reproducible cart swing-up artifact. The full accounting, and how each prior ite
 differs (the code-less `WwR92kx6tcA` video, Kotelovych 2024 Isaac-Sim
 stabilization, Lam & Davison base-torque balance, the Glück et al. hardware
 triple), is in **[PRIOR_ART.md](PRIOR_ART.md)**. Two further items it does not
-displace: Oh et al. (*IJCAS* 2025, "QIP") is RL n=4 hardware, with rotary or
-base actuation rather than a horizontal cart (the paper is paywalled, so the
-actuation is read from the abstract); and the yacine/@yacineMTB n=6 social-media
+displace: Oh et al. (*IJCAS* 2025, "QIP") is RL n=4 hardware on a cart (single-motor
+linear rail; the paper is paywalled, so the actuator is inferred from the
+abstract, from "QIP" nomenclature, and from the authors' cart-QIP lineage,
+not quoted verbatim); and the yacine/@yacineMTB n=6 social-media
 RL clips are in-progress sim with no reproducible artifact.
 
 ---
@@ -247,8 +248,8 @@ RL clips are in-progress sim with no reproducible artifact.
   stabilization only, sim, v=1…7.)
 - Oh, Lee, Ryoo, Koh, Han, Lee. "Reinforcement learning to achieve real-time
   control of a quadruple inverted pendulum (QIP)." *IJCAS* 23(9):2797-2806, 2025.
-  (n=4, RL hardware; rotary or base actuation per the abstract, not a horizontal
-  cart.)
+  (n=4, RL hardware; cart-mounted single-motor QIP, strongly inferred; full
+  text paywalled.)
 - "The quintuple inverted pendulum." YouTube video id `WwR92kx6tcA`. (Matlab/
   Simulink per the description; claims swing-up + stabilization; **no public
   code**. The claim is taken from the title and description only.)
