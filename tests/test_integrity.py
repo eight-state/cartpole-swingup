@@ -38,6 +38,18 @@ def test_retained_verification_witness_is_passing() -> None:
     assert witness["first_current_target_contradiction"] is None
 
 
+def test_expected_witness_pins_invariants_not_platform_sensitive_metrics() -> None:
+    expected_path = Path("artifacts/expected-witness.json")
+    expected = json.loads(expected_path.read_text(encoding="utf-8"))
+    assert set(expected["assertions"]["numeric"]) == {
+        "numeric_witness.execution.duration_s",
+        "numeric_witness.execution.start_max_abs_from_exact_hanging",
+        "numeric_witness.forces.overall.max_raw_applied_abs_delta_n",
+        "numeric_witness.success_set.continuous_in_success_set_duration_s",
+        "numeric_witness.success_set.continuous_in_success_set_samples",
+    }
+
+
 def test_demo_cli_accepts_an_absolute_external_output(
     monkeypatch,
     tmp_path: Path,

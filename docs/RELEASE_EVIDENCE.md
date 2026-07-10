@@ -17,3 +17,5 @@ The separate 0.05 degree promotion screen fails. It measures a 1.6396136559 degr
 ## Scope
 
 The perturbation evidence covers the three named seeds, 24 draws per seed, the distribution and controller contract in `METHOD.md`, and this numerical environment. It does not establish broader robustness.
+
+GitHub Actions evaluates source identity, schedule, boundary events, and success predicates on Windows Server. `artifacts/verification.json` retains the Windows 11 floating-point measurements quoted above.

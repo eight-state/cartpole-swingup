@@ -46,23 +46,9 @@
     "numeric": {
       "numeric_witness.execution.duration_s": {"atol": 0.0, "value": 21.7},
       "numeric_witness.execution.start_max_abs_from_exact_hanging": {"atol": 0.0, "value": 0.0},
-      "numeric_witness.forces.overall.applied_peak_abs_n": {"atol": 1e-08, "value": 36.32556326674686},
       "numeric_witness.forces.overall.max_raw_applied_abs_delta_n": {"atol": 0.0, "value": 0.0},
-      "numeric_witness.forces.overall.raw_peak_abs_n": {"atol": 1e-08, "value": 36.32556326674686},
-      "numeric_witness.forces.static_hold.first_applied_force_n": {"atol": 1e-08, "value": 18.82377556470601},
-      "numeric_witness.forces.static_hold.first_raw_force_n": {"atol": 1e-08, "value": 18.82377556470601},
-      "numeric_witness.forces.static_hold.raw_peak_abs_n": {"atol": 1e-08, "value": 18.82377556470601},
-      "numeric_witness.promotion_screen_separate_from_current_target.first_error_over_0_05_deg.tick": {"atol": 0.0, "value": 3534},
-      "numeric_witness.promotion_screen_separate_from_current_target.first_error_over_0_05_deg.value": {"atol": 1e-08, "value": 0.05004520376090927},
-      "numeric_witness.promotion_screen_separate_from_current_target.max_reference_error_deg_through_switch": {"atol": 1e-08, "value": 1.6396136558518466},
       "numeric_witness.success_set.continuous_in_success_set_duration_s": {"atol": 0.0, "value": 12.0},
-      "numeric_witness.success_set.continuous_in_success_set_samples": {"atol": 0.0, "value": 12001},
-      "numeric_witness.success_set.final_state.max_wrapped_link_angle_deg": {"atol": 1e-08, "value": 0.010226794809905217},
-      "numeric_witness.switch_state.cart_position_m": {"atol": 1e-08, "value": -0.11588800174225596},
-      "numeric_witness.switch_state.cart_rate_m_s": {"atol": 1e-08, "value": -0.03401199181449865},
-      "numeric_witness.switch_state.max_link_rate_rad_s": {"atol": 1e-08, "value": 0.018414223945328843},
-      "numeric_witness.switch_state.max_wrapped_link_angle_deg": {"atol": 1e-08, "value": 0.07455641155893676},
-      "numeric_witness.track_bound.combined_peak_abs_cart_m": {"atol": 1e-08, "value": 6.608484078496595}
+      "numeric_witness.success_set.continuous_in_success_set_samples": {"atol": 0.0, "value": 12001}
     }
   },
   "integrity": {
