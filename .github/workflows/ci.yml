@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Sync the locked environment
+        run: uv sync --locked
+      - name: Lint release code and tests
+        run: uv run ruff check reproduce_n11.py scripts tests
+      - name: Run rigor tests
+        run: uv run python -m pytest -q
+      - name: Reproduce the unperturbed release
+        run: uv run python reproduce_n11.py
