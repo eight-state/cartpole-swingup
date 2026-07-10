@@ -69,7 +69,16 @@ def cli(argv: Sequence[str] | None = None) -> int:
     initial_audit = audit_release_artifacts()
     verifier = run_verifier()
     if verifier["verdict"] != "PASS" or not verifier["expected_witness"]["all_assertions_pass"]:
-        print(json.dumps(_summary(initial_audit, verifier), indent=2, sort_keys=True))
+        print(
+            json.dumps(
+                {
+                    "release_summary": _summary(initial_audit, verifier),
+                    "verifier": verifier,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
         return 1
     if not args.gate:
         print(json.dumps(_summary(initial_audit, verifier), indent=2, sort_keys=True))
