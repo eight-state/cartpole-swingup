@@ -49,7 +49,7 @@ The repository keeps the artifacts under `runs/r2/` because each banked gate JSO
 
 `docs/METHOD.md` defines the plant, controller, gate, and success predicate. `docs/PRIOR_ART.md` records the comparison boundary.
 
-The runtime core in `src/cartpole_race/`, `scripts/_dtvlqr.py`, and `scripts/fast_pieces.py` is byte-identical to the shared core in [decuple-cartpole](https://github.com/eight-state/decuple-cartpole). The MIT license carries the same 2026 Alex Garcia Gil copyright notice.
+Eight State retained the [decuple-cartpole](https://github.com/eight-state/decuple-cartpole) runtime core byte for byte in `src/cartpole_race/`, `scripts/_dtvlqr.py`, and `scripts/fast_pieces.py`. The MIT license carries the same 2026 Alex Garcia Gil copyright notice.
 
 ## License
 

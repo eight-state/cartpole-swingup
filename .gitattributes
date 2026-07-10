@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.gif -text
+*.npz -text
+runs/r2/gate_n11_preroll_seed*.json text eol=crlf
