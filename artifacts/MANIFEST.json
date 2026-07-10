@@ -1,0 +1,20 @@
+{
+  "release": "N12",
+  "schema_version": 1,
+  "sha256": {
+    "artifacts/n12-release-source-sha256.txt": "14bd927dc58a8b333af93e704d7d5c70478ee73ba1a7b9f1abddd215fbe98971",
+    "artifacts/nom_n12_4ms_fast.npz": "bc49f597bc8235f391ff1deeb727a43c1264d10ced3ff5e961e09a1d92b6c2c0",
+    "runs/r2/nom_n12_4ms_fast.npz": "bc49f597bc8235f391ff1deeb727a43c1264d10ced3ff5e961e09a1d92b6c2c0",
+    "runs/r2/gate_n12_preroll_seed12345.json": "65a79f8d016cb163af59a34c64f102b776a6f7fe69a523a43542e857cda8aa16",
+    "runs/r2/gate_n12_preroll_seed777.json": "369e5a07c706059556894d700eee2be1b004095c7e900fa8cd56a8fb33aa3ec3",
+    "runs/r2/gate_n12_preroll_seed2024.json": "2cff94caf1d743c8884c02c752bc5e20ad2a11729aea46f49f8828d228f1a6b5",
+    "runs/r2/demo_n12.gif": "d9257b2fa58c1cd7e8c51b600fae51dee7116b2f691754af3343408af01df7a5",
+    "scripts/gate_preroll.py": "7b98d48d469c64d4c6017631524daa63b54c1338ffc3118b5b268056ab55d663",
+    "src/cartpole_race/__init__.py": "92f02f32168d383b97f3bc2d853456427b14219a239609de480d5c400cc6b5a3",
+    "src/cartpole_race/dynamics.py": "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46",
+    "src/cartpole_race/env_spec.py": "bb0a6b1c41403ee712b6ab0888c9b03486e327f0adba2a554bf072a989ce318d",
+    "src/cartpole_race/lqr.py": "76444997b66d7074ac4709407e04152e8631f2063555f358a716426c201813fd",
+    "src/n12_cartpole/fast_pieces.py": "e49c94f4d763a89911fa6e55fd9a460f14748246c0096d49694429501e1e20a9",
+    "tests/test_gate_preroll_config.py": "2c8fa03cd587a81f9d1b196a6ac0a4264b3b9ff5c3ce230421de2cb8b23c3fa8"
+  }
+}

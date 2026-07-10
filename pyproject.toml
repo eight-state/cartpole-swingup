@@ -1,0 +1,55 @@
+[project]
+name = "duodecuple-cartpole"
+version = "1.0.0"
+description = "Reproducible N12 cart-pole release artifacts in deterministic saturated simulation."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12, <3.13"
+dependencies = [
+    "casadi==3.7.2",
+    "numpy==2.4.6",
+    "pillow==12.3.0",
+    "pydantic==2.13.4",
+    "PyYAML==6.0.3",
+    "scipy==1.17.1",
+]
+
+[dependency-groups]
+dev = [
+    "mypy==1.19.1",
+    "pytest==9.0.2",
+    "ruff==0.15.16",
+]
+
+[project.scripts]
+n12-demo = "n12_cartpole.demo:cli"
+n12-release = "n12_cartpole.release:cli"
+n12-verify = "n12_cartpole.verifier:cli"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cartpole_race", "src/n12_cartpole"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+exclude = [".venv", "scripts/gate_preroll.py"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.mypy]
+files = ["src/n12_cartpole/verifier.py"]
+python_version = "3.12"
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["cartpole_race.*", "n12_cartpole.fast_pieces"]
+follow_imports = "skip"
+ignore_missing_imports = true

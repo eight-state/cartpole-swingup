@@ -1,0 +1,202 @@
+{
+  "contract": {
+    "control_dt_s": 0.001,
+    "force_bound_n": 150.0,
+    "n_links": 12,
+    "rk4_substep_s": 0.00025,
+    "rk4_substeps_per_control_tick": 4,
+    "switch_tick": 9700,
+    "total_ticks": 21700,
+    "track_bound_m": 10.0,
+    "velocity_q_scale": 0.25
+  },
+  "current_target": "one exact unperturbed 1 kHz live Qv x0.25 TVLQR swing-up from hanging, then default static CARE through a continuous >=5 s locked-success-set hold; no raw-force violation, clipping, non-finite value, or |cart| >10 m",
+  "expected_witness": {
+    "all_assertions_pass": true,
+    "failures": []
+  },
+  "first_current_target_contradiction": null,
+  "input_compatibility": {
+    "artifact_sha256_matches_frozen_value": true,
+    "dense_controls_are_repeated_source_controls": true,
+    "dense_shapes_match": true,
+    "dense_start_max_abs_from_exact_hanging": 5.1512337001360985e-22,
+    "force_bound_matches": true,
+    "metadata": {
+      "force": 150.0,
+      "horizon": 10.0,
+      "n": 12,
+      "n_nodes": 2500
+    },
+    "metadata_matches": true,
+    "plant_timing_matches": true,
+    "rk4_substeps_per_control_tick": 4,
+    "source_files_match_frozen_values": true,
+    "source_finite": true,
+    "source_shapes_match": true,
+    "source_start_max_abs_from_exact_hanging": 5.1512337001360985e-22,
+    "track_bound_matches": true
+  },
+  "integrity": {
+    "artifact_sha256": "bc49f597bc8235f391ff1deeb727a43c1264d10ced3ff5e961e09a1d92b6c2c0",
+    "source_sha256": {
+      "dynamics": "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46",
+      "env_spec": "bb0a6b1c41403ee712b6ab0888c9b03486e327f0adba2a554bf072a989ce318d",
+      "fast_pieces": "e49c94f4d763a89911fa6e55fd9a460f14748246c0096d49694429501e1e20a9",
+      "lqr": "76444997b66d7074ac4709407e04152e8631f2063555f358a716426c201813fd",
+      "package_init": "92f02f32168d383b97f3bc2d853456427b14219a239609de480d5c400cc6b5a3"
+    }
+  },
+  "numeric_witness": {
+    "execution": {
+      "duration_s": 21.7,
+      "phase_sequence_valid": true,
+      "single_rollout_zoh_call": true,
+      "start_max_abs_from_exact_hanging": 0.0,
+      "start_state": "model.x_equilibrium('down')",
+      "static_care_ticks": [
+        9700,
+        21699
+      ],
+      "stored_controls_replayed": false,
+      "stored_state_injected": false,
+      "switch_tick": 9700,
+      "switch_time_s": 9.700000000000001,
+      "time_grid_exact_1khz": true,
+      "total_ticks": 21700,
+      "tvlqr_ticks": [
+        0,
+        9699
+      ]
+    },
+    "finite": {
+      "all_applied_forces": true,
+      "all_raw_forces": true,
+      "all_states": true,
+      "first_nonfinite_applied_force": null,
+      "first_nonfinite_raw_force": null,
+      "first_nonfinite_state": null
+    },
+    "forces": {
+      "overall": {
+        "applied_peak_abs_n": 36.32556326674686,
+        "first_clipping": null,
+        "first_raw_over_force_bound": null,
+        "max_raw_applied_abs_delta_n": 0.0,
+        "raw_peak_abs_n": 36.32556326674686
+      },
+      "static_hold": {
+        "applied_peak_abs_n": 18.82377556470601,
+        "first_applied_force_n": 18.82377556470601,
+        "first_clipping": null,
+        "first_raw_force_n": 18.82377556470601,
+        "first_raw_over_force_bound": null,
+        "max_raw_applied_abs_delta_n": 0.0,
+        "raw_peak_abs_n": 18.82377556470601
+      },
+      "tvlqr_prefix": {
+        "applied_peak_abs_n": 36.32556326674686,
+        "first_clipping": null,
+        "first_raw_over_force_bound": null,
+        "max_raw_applied_abs_delta_n": 0.0,
+        "raw_peak_abs_n": 36.32556326674686
+      }
+    },
+    "promotion_screen_separate_from_current_target": {
+      "does_not_change_current_target_verdict": true,
+      "evaluated_only_on_live_tvlqr_prefix": [
+        0,
+        9700
+      ],
+      "first_error_over_0_05_deg": {
+        "tick": 3534,
+        "time_s": 3.5340000000000003,
+        "value": 0.05004520376090927
+      },
+      "max_reference_error_deg_through_switch": 1.6396136558518466,
+      "part_of_current_target": false,
+      "passes_promotion_screen": false,
+      "screen": "reset-densified-reference maximum wrapped link-angle error <= 0.05 deg"
+    },
+    "static_controller": {
+      "construction": "default static_lqr(model): continuous CARE with make_Q()/make_R()",
+      "gain_peak_abs": 756511913.6173218,
+      "p_condition_2": 1.1070189598549334e+16,
+      "q_diagonal": [
+        1.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        1.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ],
+      "r": 0.02
+    },
+    "success_set": {
+      "continuous_in_success_set_duration_s": 12.0,
+      "continuous_in_success_set_samples": 12001,
+      "every_state_from_switch_through_final_in_success_set": true,
+      "final_state": {
+        "cart_position_m": 3.1987345189440065e-05,
+        "cart_rate_m_s": -0.0018668185310018745,
+        "finite": true,
+        "in_success_set": true,
+        "max_link_rate_rad_s": 8.587360503577597e-05,
+        "max_wrapped_link_angle_deg": 0.010226794809905217
+      },
+      "first_hold_state_out_of_success_set": null,
+      "locked_predicate": {
+        "max_abs_cart_m": 2.0,
+        "max_abs_cart_rate_m_s": 0.5,
+        "max_link_rate_rad_s": 0.5,
+        "max_wrapped_link_angle_deg": 5.0
+      },
+      "required_current_target_duration_s": 5.0,
+      "stronger_full_hold_duration_s": 12.0,
+      "switch_in_success_set": true
+    },
+    "switch_state": {
+      "cart_position_m": -0.11588800174225596,
+      "cart_rate_m_s": -0.03401199181449865,
+      "finite": true,
+      "in_success_set": true,
+      "max_link_rate_rad_s": 0.018414223945328843,
+      "max_wrapped_link_angle_deg": 0.07455641155893676
+    },
+    "track_bound": {
+      "bound_abs_m": 10.0,
+      "combined_peak_abs_cart_m": 6.608484078496595,
+      "first_exceedance": null,
+      "hold_peak_abs_cart_m": 0.22922915460699197,
+      "prefix_peak_abs_cart_m": 6.608484078496595
+    }
+  },
+  "runtime": {
+    "numpy": "2.4.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "python_implementation": "CPython"
+  },
+  "schema_version": 1,
+  "verdict": "PASS"
+}
