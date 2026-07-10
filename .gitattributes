@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.gif -text
+*.npz -text
+runs/r2/gate_n12_preroll_seed*.json text eol=crlf
+src/fast_pieces.py text eol=crlf
+src/n12_cartpole/fast_pieces.py text eol=crlf
