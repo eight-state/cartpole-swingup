@@ -1,7 +1,7 @@
 [project]
 name = "duodecuple-cartpole"
 version = "1.0.0"
-description = "Reproducible N12 cart-pole release artifacts in deterministic saturated simulation."
+description = "Lean, reproducible N12 cart-pole comparison from a frozen nominal."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.12, <3.13"
@@ -16,14 +16,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "mypy==1.19.1",
     "pytest==9.0.2",
     "ruff==0.15.16",
 ]
 
 [project.scripts]
 n12-demo = "n12_cartpole.demo:cli"
-n12-release = "n12_cartpole.release:cli"
 n12-verify = "n12_cartpole.verifier:cli"
 
 [build-system]
@@ -39,17 +37,7 @@ testpaths = ["tests"]
 
 [tool.ruff]
 target-version = "py312"
-exclude = [".venv", "scripts/gate_preroll.py"]
+exclude = [".venv", ".working"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F"]
-
-[tool.mypy]
-files = ["src/n12_cartpole/verifier.py"]
-python_version = "3.12"
-strict = true
-
-[[tool.mypy.overrides]]
-module = ["cartpole_race.*", "n12_cartpole.fast_pieces"]
-follow_imports = "skip"
-ignore_missing_imports = true

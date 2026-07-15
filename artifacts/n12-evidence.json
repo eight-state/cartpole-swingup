@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "release": "N12",
+  "capabilities": {
+    "nominal_synthesis": false,
+    "perturbed_gate_rerun": false
+  },
+  "frozen_nominal": {
+    "path": "artifacts/nom_n12_4ms_fast.npz",
+    "sha256": "bc49f597bc8235f391ff1deeb727a43c1264d10ced3ff5e961e09a1d92b6c2c0",
+    "state_shape": [2501, 26],
+    "control_shape": [2500],
+    "metadata": {
+      "horizon": 10.0,
+      "n": 12,
+      "force": 150.0,
+      "n_nodes": 2500
+    }
+  },
+  "unperturbed_achievement": {
+    "current_target": "one exact unperturbed 1 kHz live Qv x0.25 TVLQR swing-up from hanging, then default static CARE through a continuous >=5 s locked-success-set hold; no raw-force violation, clipping, non-finite value, or |cart| >10 m",
+    "historic_observation": {
+      "duration_s": 21.7,
+      "raw_and_applied_force_peak_n": 36.32556326674686,
+      "peak_abs_cart_m": 6.608484078496595,
+      "switch_max_wrapped_link_angle_deg": 0.07455641155893676,
+      "switch_max_link_rate_rad_s": 0.018414223945328843,
+      "continuous_hold_s": 12.0
+    },
+    "promotion_screen": {
+      "part_of_current_target": false,
+      "screen": "reset-densified-reference maximum wrapped link-angle error <= 0.05 deg",
+      "passes": false,
+      "max_reference_error_deg_through_switch": 1.6396136558518466,
+      "first_error_over_0_05_deg": {"tick": 3534, "time_s": 3.5340000000000003, "value": 0.05004520376090927}
+    },
+    "scope": "Deterministic simulation with full-state feedback only; no hardware, model-mismatch, or formal-guarantee claim."
+  },
+  "banked_gate": {
+    "summary": {"successes": 72, "trials": 72},
+    "scope": "Loaded records from three fixed seeds, each with 24 N(0, 0.02) initial-condition draws. They are audited here, not rerun.",
+    "records": [
+      {
+        "controller": "preroll_down_lqr+tvlqr_track+static_hold", "n_links": 12, "nominal": "runs/r2/nom_n12_4ms_fast.npz", "sigma": 0.02, "T_pre_s": 18.0, "pre_roll_tol": 0.0, "pre_roll_vel_q_scale": 4.0, "tracker_link_rate_q_scale": 0.25, "reference_densified_from_coarse": true, "reference_densify_stride": 4, "tracker_to_hold_switch_tick": 9700, "tracker_to_hold_switch_time_s": 9.700000000000001, "hold_window_s": 10.0, "n_success": 24, "n_ic": 24, "seed": 12345, "wilson95": [0.862, 1.0],
+        "results": [
+          {"tag":0,"success":true,"handoff_deg":0.0762,"hold_s":10.0,"peakF":150.0,"pert_deg":2.69,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":1,"success":true,"handoff_deg":0.0695,"hold_s":10.0,"peakF":150.0,"pert_deg":1.621,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":2,"success":true,"handoff_deg":0.0725,"hold_s":10.0,"peakF":81.0,"pert_deg":1.668,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":3,"success":true,"handoff_deg":0.079,"hold_s":10.0,"peakF":116.5,"pert_deg":2.302,"resid":0.00008,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":4,"success":true,"handoff_deg":0.079,"hold_s":10.0,"peakF":70.7,"pert_deg":1.703,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":5,"success":true,"handoff_deg":0.0754,"hold_s":10.0,"peakF":150.0,"pert_deg":2.475,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":6,"success":true,"handoff_deg":0.075,"hold_s":10.0,"peakF":121.1,"pert_deg":2.66,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":7,"success":true,"handoff_deg":0.075,"hold_s":10.0,"peakF":150.0,"pert_deg":1.47,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":8,"success":true,"handoff_deg":0.0767,"hold_s":10.0,"peakF":150.0,"pert_deg":0.958,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":9,"success":true,"handoff_deg":0.0789,"hold_s":10.0,"peakF":36.3,"pert_deg":4.351,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":10,"success":true,"handoff_deg":0.0758,"hold_s":10.0,"peakF":44.9,"pert_deg":2.685,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":11,"success":true,"handoff_deg":0.0796,"hold_s":10.0,"peakF":142.2,"pert_deg":2.243,"resid":0.00012,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":12,"success":true,"handoff_deg":0.0707,"hold_s":10.0,"peakF":150.0,"pert_deg":1.936,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":13,"success":true,"handoff_deg":0.0727,"hold_s":10.0,"peakF":67.0,"pert_deg":2.466,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":14,"success":true,"handoff_deg":0.0741,"hold_s":10.0,"peakF":85.1,"pert_deg":2.166,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":15,"success":true,"handoff_deg":0.0729,"hold_s":10.0,"peakF":36.3,"pert_deg":1.988,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":16,"success":true,"handoff_deg":0.0674,"hold_s":10.0,"peakF":82.9,"pert_deg":2.414,"resid":0.00016,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":17,"success":true,"handoff_deg":0.0758,"hold_s":10.0,"peakF":82.1,"pert_deg":1.697,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":18,"success":true,"handoff_deg":0.0682,"hold_s":10.0,"peakF":69.7,"pert_deg":2.376,"resid":0.00007,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":19,"success":true,"handoff_deg":0.0901,"hold_s":10.0,"peakF":150.0,"pert_deg":2.635,"resid":0.00013,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":20,"success":true,"handoff_deg":0.0725,"hold_s":10.0,"peakF":36.3,"pert_deg":2.15,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":21,"success":true,"handoff_deg":0.0807,"hold_s":10.0,"peakF":150.0,"pert_deg":2.439,"resid":0.00007,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":22,"success":true,"handoff_deg":0.0809,"hold_s":10.0,"peakF":38.8,"pert_deg":2.575,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":23,"success":true,"handoff_deg":0.0742,"hold_s":10.0,"peakF":150.0,"pert_deg":2.438,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null}
+        ]
+      },
+      {
+        "controller": "preroll_down_lqr+tvlqr_track+static_hold", "n_links": 12, "nominal": "runs/r2/nom_n12_4ms_fast.npz", "sigma": 0.02, "T_pre_s": 18.0, "pre_roll_tol": 0.0, "pre_roll_vel_q_scale": 4.0, "tracker_link_rate_q_scale": 0.25, "reference_densified_from_coarse": true, "reference_densify_stride": 4, "tracker_to_hold_switch_tick": 9700, "tracker_to_hold_switch_time_s": 9.700000000000001, "hold_window_s": 10.0, "n_success": 24, "n_ic": 24, "seed": 777, "wilson95": [0.862, 1.0],
+        "results": [
+          {"tag":0,"success":true,"handoff_deg":0.0671,"hold_s":10.0,"peakF":150.0,"pert_deg":2.454,"resid":0.00009,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":1,"success":true,"handoff_deg":0.0826,"hold_s":10.0,"peakF":150.0,"pert_deg":1.741,"resid":0.00005,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":2,"success":true,"handoff_deg":0.0701,"hold_s":10.0,"peakF":98.1,"pert_deg":1.778,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":3,"success":true,"handoff_deg":0.0719,"hold_s":10.0,"peakF":150.0,"pert_deg":2.468,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":4,"success":true,"handoff_deg":0.0716,"hold_s":10.0,"peakF":64.1,"pert_deg":2.31,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":5,"success":true,"handoff_deg":0.0769,"hold_s":10.0,"peakF":150.0,"pert_deg":2.223,"resid":0.00005,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":6,"success":true,"handoff_deg":0.0778,"hold_s":10.0,"peakF":150.0,"pert_deg":1.743,"resid":0.00005,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":7,"success":true,"handoff_deg":0.0802,"hold_s":10.0,"peakF":49.7,"pert_deg":2.229,"resid":0.00005,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":8,"success":true,"handoff_deg":0.0728,"hold_s":10.0,"peakF":150.0,"pert_deg":2.06,"resid":0.00005,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":9,"success":true,"handoff_deg":0.0657,"hold_s":10.0,"peakF":132.2,"pert_deg":2.712,"resid":0.00012,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":10,"success":true,"handoff_deg":0.0732,"hold_s":10.0,"peakF":150.0,"pert_deg":1.68,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":11,"success":true,"handoff_deg":0.0794,"hold_s":10.0,"peakF":62.8,"pert_deg":2.236,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":12,"success":true,"handoff_deg":0.0736,"hold_s":10.0,"peakF":150.0,"pert_deg":1.987,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":13,"success":true,"handoff_deg":0.0766,"hold_s":10.0,"peakF":150.0,"pert_deg":2.041,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":14,"success":true,"handoff_deg":0.0772,"hold_s":10.0,"peakF":75.2,"pert_deg":1.653,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":15,"success":true,"handoff_deg":0.0799,"hold_s":10.0,"peakF":105.8,"pert_deg":2.339,"resid":0.00009,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":16,"success":true,"handoff_deg":0.0841,"hold_s":10.0,"peakF":150.0,"pert_deg":2.57,"resid":0.00014,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":17,"success":true,"handoff_deg":0.0715,"hold_s":10.0,"peakF":150.0,"pert_deg":1.977,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":18,"success":true,"handoff_deg":0.0778,"hold_s":10.0,"peakF":102.9,"pert_deg":1.762,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":19,"success":true,"handoff_deg":0.0801,"hold_s":10.0,"peakF":150.0,"pert_deg":2.947,"resid":0.00011,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":20,"success":true,"handoff_deg":0.0753,"hold_s":10.0,"peakF":150.0,"pert_deg":1.988,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":21,"success":true,"handoff_deg":0.082,"hold_s":10.0,"peakF":150.0,"pert_deg":3.308,"resid":0.0001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":22,"success":true,"handoff_deg":0.0804,"hold_s":10.0,"peakF":111.3,"pert_deg":1.246,"resid":0.00007,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":23,"success":true,"handoff_deg":0.081,"hold_s":10.0,"peakF":150.0,"pert_deg":2.199,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null}
+        ]
+      },
+      {
+        "controller": "preroll_down_lqr+tvlqr_track+static_hold", "n_links": 12, "nominal": "runs/r2/nom_n12_4ms_fast.npz", "sigma": 0.02, "T_pre_s": 18.0, "pre_roll_tol": 0.0, "pre_roll_vel_q_scale": 4.0, "tracker_link_rate_q_scale": 0.25, "reference_densified_from_coarse": true, "reference_densify_stride": 4, "tracker_to_hold_switch_tick": 9700, "tracker_to_hold_switch_time_s": 9.700000000000001, "hold_window_s": 10.0, "n_success": 24, "n_ic": 24, "seed": 2024, "wilson95": [0.862, 1.0],
+        "results": [
+          {"tag":0,"success":true,"handoff_deg":0.0738,"hold_s":10.0,"peakF":150.0,"pert_deg":2.074,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":1,"success":true,"handoff_deg":0.0766,"hold_s":10.0,"peakF":76.1,"pert_deg":1.176,"resid":0.00005,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":2,"success":true,"handoff_deg":0.0727,"hold_s":10.0,"peakF":58.4,"pert_deg":1.331,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":3,"success":true,"handoff_deg":0.0764,"hold_s":10.0,"peakF":150.0,"pert_deg":1.744,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":4,"success":true,"handoff_deg":0.0777,"hold_s":10.0,"peakF":132.9,"pert_deg":2.204,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":5,"success":true,"handoff_deg":0.0794,"hold_s":10.0,"peakF":150.0,"pert_deg":1.514,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":6,"success":true,"handoff_deg":0.0735,"hold_s":10.0,"peakF":150.0,"pert_deg":1.403,"resid":0.00004,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":7,"success":true,"handoff_deg":0.0824,"hold_s":10.0,"peakF":84.2,"pert_deg":2.193,"resid":0.0001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":8,"success":true,"handoff_deg":0.0724,"hold_s":10.0,"peakF":150.0,"pert_deg":2.306,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":9,"success":true,"handoff_deg":0.0823,"hold_s":10.0,"peakF":150.0,"pert_deg":2.456,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":10,"success":true,"handoff_deg":0.0723,"hold_s":10.0,"peakF":36.3,"pert_deg":1.275,"resid":0.00002,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":11,"success":true,"handoff_deg":0.0732,"hold_s":10.0,"peakF":112.0,"pert_deg":2.25,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":12,"success":true,"handoff_deg":0.0713,"hold_s":10.0,"peakF":150.0,"pert_deg":2.551,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":13,"success":true,"handoff_deg":0.074,"hold_s":10.0,"peakF":120.4,"pert_deg":1.816,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":14,"success":true,"handoff_deg":0.0742,"hold_s":10.0,"peakF":150.0,"pert_deg":1.17,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":15,"success":true,"handoff_deg":0.071,"hold_s":10.0,"peakF":150.0,"pert_deg":2.629,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":16,"success":true,"handoff_deg":0.0735,"hold_s":10.0,"peakF":150.0,"pert_deg":1.69,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":17,"success":true,"handoff_deg":0.07,"hold_s":10.0,"peakF":120.3,"pert_deg":1.519,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":18,"success":true,"handoff_deg":0.0691,"hold_s":10.0,"peakF":150.0,"pert_deg":2.195,"resid":0.00003,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":19,"success":true,"handoff_deg":0.0727,"hold_s":10.0,"peakF":150.0,"pert_deg":2.941,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":20,"success":true,"handoff_deg":0.0706,"hold_s":10.0,"peakF":98.9,"pert_deg":2.765,"resid":0.00009,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":21,"success":true,"handoff_deg":0.0777,"hold_s":10.0,"peakF":150.0,"pert_deg":2.596,"resid":0.00007,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":22,"success":true,"handoff_deg":0.075,"hold_s":10.0,"peakF":150.0,"pert_deg":1.441,"resid":0.00006,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null},
+          {"tag":23,"success":true,"handoff_deg":0.0742,"hold_s":10.0,"peakF":150.0,"pert_deg":2.364,"resid":0.00001,"t_pre":18.0,"tracker_ticks":9700,"track_ok":true,"fail":null}
+        ]
+      }
+    ]
+  }
+}

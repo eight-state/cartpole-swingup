@@ -1,41 +1,29 @@
 # Duodecuple Cart-Pole
 
-This repository reproduces the N12 cart-pole release from frozen artifacts in deterministic, force-saturated simulation.
+This repository runs the N12 controller in a fresh simulation from exact hanging.
 
-![N12 cart-pole swing-up and balance](runs/r2/demo_n12.gif)
+![N12 cart-pole](runs/r2/demo_n12.gif)
 
-## Reproduce
+## Run
 
 ```text
 uv sync --locked
-uv run n12-release
-```
-
-`n12-release` runs the artifact audit and the deterministic live verifier. The command exits nonzero when a release assertion fails.
-
-```text
-uv run n12-release --gate
-```
-
-`--gate` reruns the three fixed-seed perturbation gates and requires each regenerated JSON file to match its banked SHA256 value.
-
-```text
 uv run n12-demo
-uv run ruff check .
-uv run mypy
-uv run pytest
+uv run n12-verify
 ```
 
-`n12-demo` regenerates `runs/r2/demo_n12.gif` from the frozen nominal and live controller schedule.
+`n12-demo` writes `.working/n12-demo.gif`; `n12-verify` writes `.working/n12-verify.json`.
 
-## Repository map
+## What runs locally
 
-- [`docs/METHOD.md`](docs/METHOD.md): plant, integrator, controller schedule, perturbation distribution, and success predicate.
-- [`docs/RELEASE_EVIDENCE.md`](docs/RELEASE_EVIDENCE.md): gate totals, unperturbed witness, force boundary, promotion result, and statistical scope.
-- [`docs/PRIOR_ART.md`](docs/PRIOR_ART.md): related Eight State releases and comparison requirements.
-- [`PROVENANCE.md`](PROVENANCE.md): source origin, digest ledger, and license.
-- [`artifacts/MANIFEST.json`](artifacts/MANIFEST.json): audited release paths and SHA256 values.
+`n12-demo` loads only the 4 ms nominal from `artifacts/nom_n12_4ms_fast.npz`; it generates the dense reference, gains, states, forces, measurements, and GIF locally.
 
-## License
+This repository does not support nominal synthesis or perturbation reruns. `artifacts/n12-evidence.json` retains the 72 banked fixed-seed trials.
 
-MIT. See [LICENSE](LICENSE).
+## Read the code
+
+The deterministic simulation path contains [`env_spec.py`](src/cartpole_race/env_spec.py), [`dynamics.py`](src/cartpole_race/dynamics.py), [`lqr.py`](src/cartpole_race/lqr.py), [`fast_pieces.py`](src/n12_cartpole/fast_pieces.py), [`simulator.py`](src/n12_cartpole/simulator.py), and [`success.py`](src/n12_cartpole/success.py). [`demo.py`](src/n12_cartpole/demo.py) renders the rollout; [`verifier.py`](src/n12_cartpole/verifier.py) audits it.
+
+The claim covers deterministic simulation with full-state feedback. It excludes hardware, model mismatch, and formal guarantees.
+
+This repository uses the [MIT License](LICENSE).
