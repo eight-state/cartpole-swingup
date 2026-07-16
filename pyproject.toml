@@ -1,25 +1,27 @@
 [project]
 name = "quintuple-cartpole"
 version = "1.0.0"
-description = "First public, reproducible, verified n=5 (quintuple) inverted-pendulum-on-a-cart swing-up + balance."
+description = "Saved-nominal n=5 cart-pole closed-loop replay with auditable historical evidence."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11, <3.13"
-
-# Pinned to the exact versions this release was verified with. Loosen at your
-# own risk; the headline numbers were produced under these.
 dependencies = [
     "casadi==3.7.2",
     "numpy==2.4.6",
     "scipy==1.17.1",
+    "matplotlib==3.10.9",
     "pydantic==2.13.4",
     "pyyaml==6.0.2",
-    "matplotlib==3.10.9",
 ]
+
+[project.scripts]
+n5-demo = "cartpole_race.release:demo_main"
+n5-verify = "cartpole_race.release:verify_main"
 
 [dependency-groups]
 dev = [
     "pytest>=8.3",
+    "ruff==0.15.0",
 ]
 
 [build-system]
@@ -31,5 +33,9 @@ packages = ["src/cartpole_race"]
 
 [tool.pytest.ini_options]
 addopts = "-q --import-mode=importlib"
-pythonpath = ["."]
+pythonpath = ["src"]
 testpaths = ["tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
