@@ -1,7 +1,8 @@
-name: ci
+name: verification
 
 on:
   push:
+    branches: [main, feat/n11-publish]
   pull_request:
   workflow_dispatch:
 
@@ -13,9 +14,11 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - name: Sync the locked environment
         run: uv sync --locked
-      - name: Lint release code and tests
-        run: uv run ruff check reproduce_n11.py scripts tests
-      - name: Run rigor tests
+      - name: Lint
+        run: uv run ruff check .
+      - name: Run focused tests
         run: uv run python -m pytest -q
-      - name: Reproduce the unperturbed release
-        run: uv run python reproduce_n11.py
+      - name: Run the fresh demo
+        run: uv run n11-demo
+      - name: Audit evidence and rerun the live stack
+        run: uv run n11-verify
