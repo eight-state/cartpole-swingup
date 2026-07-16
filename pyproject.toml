@@ -1,7 +1,7 @@
 [project]
 name = "undecuple-cartpole"
 version = "1.0.0"
-description = "Reproducible n=11 cart-pole swing-up and balance artifacts in deterministic saturated simulation."
+description = "Saved-nominal N11 cart-pole replay with auditable banked evidence."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11, <3.13"
@@ -14,9 +14,9 @@ dependencies = [
     "scipy==1.17.1",
 ]
 
-[project.optional-dependencies]
-analysis = ["pandas"]
-rl = ["gymnasium", "torch"]
+[project.scripts]
+n11-demo = "cartpole_race.release:demo_main"
+n11-verify = "cartpole_race.release:verify_main"
 
 [dependency-groups]
 dev = [
@@ -33,7 +33,7 @@ packages = ["src/cartpole_race"]
 
 [tool.pytest.ini_options]
 addopts = "-q --import-mode=importlib"
-pythonpath = [".", "src", "scripts", "configs"]
+pythonpath = ["src"]
 testpaths = ["tests"]
 
 [tool.ruff]

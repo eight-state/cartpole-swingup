@@ -1,4 +1,5 @@
 * text=auto eol=lf
-*.gif -text
-*.npz -text
-runs/r2/gate_n11_preroll_seed*.json text eol=crlf
+
+# Frozen release evidence must retain Git's exact bytes on every platform.
+runs/r2/** -text
+runs/r2/*.json whitespace=cr-at-eol
