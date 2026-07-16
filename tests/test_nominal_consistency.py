@@ -98,7 +98,8 @@ def test_parent_solve_transcription_defect() -> None:
     for k in range(0, len(U), 7):  # sampled (every 7th node) for speed
         x = X[k]
         u = float(U[k])
-        k1 = model.f(x, u); k2 = model.f(x + 0.5 * h * np.asarray(k1).reshape(-1), u)
+        k1 = model.f(x, u)
+        k2 = model.f(x + 0.5 * h * np.asarray(k1).reshape(-1), u)
         k3 = model.f(x + 0.5 * h * np.asarray(k2).reshape(-1), u)
         k4 = model.f(x + h * np.asarray(k3).reshape(-1), u)
         xn = x + (h / 6.0) * (np.asarray(k1).reshape(-1)

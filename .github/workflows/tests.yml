@@ -1,4 +1,4 @@
-name: tests
+name: verification
 
 on:
   push:
@@ -7,13 +7,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-      - name: Sync the pinned environment
-        run: uv sync --frozen
-      - name: Run the test suite
+      - uses: astral-sh/setup-uv@v5
+      - name: Sync the locked environment
+        run: uv sync --locked
+      - name: Lint
+        run: uv run ruff check .
+      - name: Run tests
         run: uv run python -m pytest -q
+      - name: Run the fresh demo
+        run: uv run n10-demo
+      - name: Audit release evidence and rerun the live stack
+        run: uv run n10-verify
