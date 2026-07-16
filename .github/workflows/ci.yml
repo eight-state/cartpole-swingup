@@ -2,6 +2,7 @@ name: verification
 
 on:
   push:
+    branches: [main, feat/n11-publish]
   pull_request:
   workflow_dispatch:
 
