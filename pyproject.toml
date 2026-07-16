@@ -1,13 +1,10 @@
 [project]
 name = "septuple-cartpole"
 version = "1.0.4"
-description = "First open-source, code-reproducible, principled (non-RL) n=7 (septuple) inverted-pendulum-on-a-cart swing-up + balance artifact, empirically validated in saturated simulation."
+description = "Saved-nominal n=7 cart-pole replay with audited banked evidence."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11, <3.13"
-
-# Pinned to the exact versions this release was validated with. Loosen at your
-# own risk; the headline numbers were produced under these.
 dependencies = [
     "casadi==3.7.2",
     "numpy==2.4.6",
@@ -17,9 +14,14 @@ dependencies = [
     "matplotlib==3.10.9",
 ]
 
+[project.scripts]
+n7-demo = "cartpole_race.release:demo_main"
+n7-verify = "cartpole_race.release_audit:main"
+
 [dependency-groups]
 dev = [
     "pytest>=8.3",
+    "ruff==0.15.21",
 ]
 
 [build-system]
@@ -31,5 +33,19 @@ packages = ["src/cartpole_race"]
 
 [tool.pytest.ini_options]
 addopts = "-q --import-mode=importlib"
-pythonpath = [".", "src", "scripts", "configs"]
+pythonpath = ["src"]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = [
+    "src/cartpole_race/__init__.py",
+    "src/cartpole_race/discrete_tvlqr.py",
+    "src/cartpole_race/dynamics.py",
+    "src/cartpole_race/env_spec.py",
+    "src/cartpole_race/lqr.py",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
