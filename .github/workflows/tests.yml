@@ -15,5 +15,11 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Sync the pinned environment
         run: uv sync --frozen
-      - name: Run the test suite
-        run: uv run python -m pytest -q
+      - name: Lint the release surface
+        run: uv run --locked ruff check .
+      - name: Run the focused tests
+        run: uv run --locked python -m pytest -q
+      - name: Run the fresh demo
+        run: uv run --locked n8-demo
+      - name: Verify the release evidence
+        run: uv run --locked n8-verify
