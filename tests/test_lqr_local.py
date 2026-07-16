@@ -12,7 +12,6 @@ from cartpole_race.lqr import (
     wrap_state_error,
     wrap_to_pi,
 )
-
 from tests.conftest import spec_for
 
 
@@ -33,7 +32,7 @@ def test_closed_loop_hurwitz(n: int) -> None:
 @pytest.mark.parametrize("n", [1, 2, 3])
 def test_static_policy_stabilizes_small_perturbation(n: int) -> None:
     """A small upright perturbation converges into the success set in 5 s."""
-    from cartpole_race.funnels import in_success_set
+    from cartpole_race.predicate import in_success_set
 
     model = NLinkCartPole(spec_for(n))
     K, P = static_lqr(model)

@@ -1,24 +1,21 @@
 """Committed gate: the exact-ZOH discrete TVLQR closed loop CONTRACTS along
 the shipped n=10 nominal (monodromy spectral radius < 1).
 
-This is the controller fact behind the swing-up: the repo's continuous-Riccati
-TVLQR with interpolated gains is closed-loop unstable along this nominal, while
-the discrete-time design (per-tick exact ZOH discretization + backward discrete
-Riccati, scripts/_dtvlqr.py) gives rho ~= 0.1042. See docs/METHOD.md.
+This is the controller fact behind the replay: the discrete-time design uses
+per-tick exact-ZOH discretization and a backward discrete Riccati recursion,
+which gives rho ~= 0.1042 for the shipped nominal.
 """
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 import numpy as np
 
-REPO = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO / "scripts"))
+from cartpole_race.discrete_tvlqr import DiscreteTVLQR
+from cartpole_race.dynamics import NLinkCartPole
+from cartpole_race.env_spec import CartPoleSpec
 
-from cartpole_race.dynamics import NLinkCartPole  # noqa: E402
-from cartpole_race.env_spec import CartPoleSpec  # noqa: E402
-from _dtvlqr import DiscreteTVLQR  # noqa: E402
+REPO = Path(__file__).resolve().parent.parent
 
 
 def test_discrete_tvlqr_monodromy_contracts() -> None:
