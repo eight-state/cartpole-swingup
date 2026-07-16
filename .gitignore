@@ -3,11 +3,6 @@ __pycache__/
 .venv/
 .pytest_cache/
 .ruff_cache/
-# Regenerated artifacts (the shipped verified ones are tracked explicitly).
-results/*.log
-results/demo_quintuple_plots.png
-results/demo_quintuple_force_zoom.png
-
-# stray local logs
+.working/
 *.log
 MY_*.log
