@@ -8,9 +8,6 @@ configuration concerns into the symbolic dynamics graph.
 
 from __future__ import annotations
 
-from pathlib import Path
-
-import yaml
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 
@@ -105,53 +102,3 @@ class CartPoleSpec(BaseModel):
             control_rate_hz=self.control_rate_hz,
             rk4_max_step_s=self.rk4_max_step_s,
         )
-
-
-# Mapping from YAML field names (proposal spec) to CartPoleSpec field names.
-_YAML_ALIASES = {
-    "n_links": "n_links",
-    "cart_mass_kg": "cart_mass_kg",
-    "link_masses_kg": "link_masses_kg",
-    "link_lengths_m": "link_lengths_m",
-    "gravity_m_s2": "gravity_m_s2",
-    "damping_cart_n_s_m": "damping_cart_n_s_m",
-    "damping_links_n_m_s_rad": "damping_links_n_m_s_rad",
-    "force_bound_n": "force_bound_n",
-    "track_half_length_m": "track_half_length_m",
-    "control_rate_hz": "control_rate_hz",
-    "rk4_max_step_s": "rk4_max_step_s",
-}
-
-# Keys that appear in the proposal YAML but are not part of the M0 dynamics
-# spec (they govern controllers/proof, out of M0 scope). Silently ignored.
-_IGNORED_YAML_KEYS = {
-    "link_inertia",
-    "logging_dt_s",
-    "hold_time_s",
-}
-
-
-def load_spec(path: str | Path) -> CartPoleSpec:
-    """Load a :class:`CartPoleSpec` from a YAML file.
-
-    Unknown keys that belong to later milestones (e.g. ``logging_dt_s``) are
-    ignored so a single config file can carry both M0 and downstream fields.
-
-    Args:
-        path: Path to a YAML config file.
-
-    Returns:
-        A validated, frozen :class:`CartPoleSpec`.
-
-    Raises:
-        ValueError: If the YAML contains an unrecognized key.
-    """
-    raw = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
-    kwargs: dict = {}
-    for key, value in raw.items():
-        if key in _IGNORED_YAML_KEYS:
-            continue
-        if key not in _YAML_ALIASES:
-            raise ValueError(f"Unknown config key {key!r} in {path}")
-        kwargs[_YAML_ALIASES[key]] = value
-    return CartPoleSpec(**kwargs)
