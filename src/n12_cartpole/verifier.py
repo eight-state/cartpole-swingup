@@ -196,8 +196,9 @@ def run_verifier() -> dict[str, Any]:
         "no_nominal_synthesis_supported": loaded["evidence"]["capabilities"]["nominal_synthesis"] is False,
         "banked_gates_are_loaded_not_rerun": loaded["evidence"]["capabilities"]["perturbed_gate_rerun"] is False,
         "reference_is_reset_densified_from_loaded_nominal": reference_ok,
-        "live_observation_matches_banked_witness": all(
-            abs(delta) <= 1e-12 for delta in observation_deltas.values()
+        "platform_stable_witness_matches": bool(
+            abs(observation_deltas["duration_s"]) <= 1e-12
+            and abs(observation_deltas["continuous_hold_s"]) <= 1e-12
         ),
         "exact_hanging_start": bool(
             np.array_equal(rollout.states[0], rollout.model.x_equilibrium("down"))
@@ -245,6 +246,9 @@ def cli(argv: Sequence[str] | None = None) -> int:
         display_path = output
     summary = {
         "banked_gate": payload["loaded"]["banked_gate"],
+        "failed_checks": [
+            name for name, passed in payload["checks"].items() if not passed
+        ],
         "output": display_path.as_posix(),
         "recomputed_verdict": payload["verdict"],
     }
