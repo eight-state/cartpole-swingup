@@ -26,6 +26,7 @@ REPO = Path(__file__).resolve().parents[2]
 WORKING = REPO / ".working"
 HOLD_TIME_S = 5.0
 SETTLE_TIME_S = 1.0
+BANKED_SOURCE_PROVENANCE = "unverified"
 
 
 def _model() -> tuple[NLinkCartPole, CartPoleSpec]:
@@ -139,6 +140,14 @@ def _banked_commit_identities(audit: dict[str, Any]) -> list[str]:
     )
 
 
+def _banked_evidence_authority(audit: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "artifact_hashes": {name: item["sha256"] for name, item in audit["artifacts"].items()},
+        "banked_commit_identities": _banked_commit_identities(audit),
+        "banked_source_provenance": BANKED_SOURCE_PROVENANCE,
+    }
+
+
 def _working_output(path: Path) -> Path:
     output = path.resolve()
     try:
@@ -227,8 +236,7 @@ def run_authoritative_rollout(out_dir: Path, *, render: bool) -> dict[str, Any]:
     )
     summary: dict[str, Any] = {
         "authority": {
-            "artifact_hashes": {name: item["sha256"] for name, item in audit["artifacts"].items()},
-            "banked_commit_identities": _banked_commit_identities(audit),
+            **_banked_evidence_authority(audit),
             "checkout": _git_identity(),
         },
         "baseline": metrics,
