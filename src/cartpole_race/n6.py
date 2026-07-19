@@ -147,7 +147,7 @@ def _load_nominal() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 
 def in_success_set(model: NLinkCartPole, state: np.ndarray) -> bool:
-    """Per-sample N6 upright predicate; the hold evaluator makes it continuous."""
+    """Per-sample N6 upright acceptance predicate for logged 1 kHz states."""
     error = wrap_state_error(state, model.x_equilibrium("up"), model.n)
     angles = error[1 : 1 + model.n]
     angular_rates = state[model.nq + 1 :]
@@ -160,7 +160,7 @@ def in_success_set(model: NLinkCartPole, state: np.ndarray) -> bool:
 
 
 def continuous_hold_s(in_set: np.ndarray, control_dt_s: float) -> float:
-    """Duration spanned by the final uninterrupted in-set sample suffix."""
+    """Return the elapsed time spanned by the final sampled in-set suffix."""
     suffix_samples = 0
     for sample in np.asarray(in_set, dtype=bool)[::-1]:
         if not sample:
@@ -320,19 +320,33 @@ def audit_historical_evidence() -> EvidenceAudit:
     for path in EVIDENCE_PATHS:
         if not path.exists():
             errors.append(f"missing historical gate: {path.relative_to(REPO)}")
+            row_records_available = False
             continue
-        if _sha256(path) != EVIDENCE_SHA256[path.name]:
-            errors.append(f"{path.name}: canonical evidence bytes changed")
+        try:
+            if _sha256(path) != EVIDENCE_SHA256[path.name]:
+                errors.append(f"{path.name}: canonical evidence bytes changed")
+                row_records_available = False
+                continue
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            errors.append(f"{path.name}: unreadable or malformed historical gate")
+            row_records_available = False
             continue
-        report = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(report, dict):
+            errors.append(f"{path.name}: malformed historical gate")
+            row_records_available = False
+            continue
         rows = report.get("rows")
-        row_records_available = row_records_available and isinstance(rows, list)
+        row_records_available = (
+            row_records_available and isinstance(rows, list) and bool(rows)
+        )
         try:
             seed = int(report["seed"])
             successes = int(report["n_success"])
             trials = int(report["n_trials"])
         except (KeyError, TypeError, ValueError):
             errors.append(f"{path.name}: invalid seed or count fields")
+            row_records_available = False
             continue
         legs.append(HistoricalLeg(path.name, seed, successes, trials))
         if report.get("commit_sha") != EVIDENCE_COMMIT:

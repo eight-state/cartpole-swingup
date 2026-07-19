@@ -1,4 +1,4 @@
-"""The public N6 predicate is continuous and the plant clips at its boundary."""
+"""The public N6 predicate is sampled at 1 kHz; clipping occurs at the plant boundary."""
 
 import numpy as np
 
