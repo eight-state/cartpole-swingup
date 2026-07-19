@@ -1,4 +1,4 @@
-"""The public five-second claim uses elapsed time, not sample count alone."""
+"""The public five-second claim spans consecutive 1 kHz sampled states."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from cartpole_race.release import load_release_spec
 from cartpole_race.predicate import longest_continuous_hold_s
 
 
-def test_success_predicate_measures_a_continuous_five_second_window() -> None:
+def test_success_predicate_measures_a_sampled_five_second_window() -> None:
     spec = load_release_spec()
     model = NLinkCartPole(spec)
     upright = model.x_equilibrium("up")

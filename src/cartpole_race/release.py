@@ -439,7 +439,7 @@ def run_live(stack: ReleaseStack | None = None) -> LiveRun:
         },
         "live_closed_loop": {
             "handoff_max_angle_error_deg": handoff_angle_error_deg,
-            "longest_continuous_hold_s": hold_s,
+            "longest_sampled_hold_s": hold_s,
             "track_peak_abs_m": max_cart_abs_m,
             "applied_peak_force_n": float(np.max(np.abs(applied_controls))),
             "raw_peak_force_n": float(np.max(np.abs(raw))),
@@ -523,7 +523,7 @@ def _report_live(live: LiveRun) -> None:
     controller = live.metrics["controller"]
     print(
         f"[live] handoff {closed_loop['handoff_max_angle_error_deg']:.7f} deg; "
-        f"hold {closed_loop['longest_continuous_hold_s']:.1f} s; "
+        f"hold {closed_loop['longest_sampled_hold_s']:.1f} s; "
         f"applied/raw peak {closed_loop['applied_peak_force_n']:.7f}/"
         f"{closed_loop['raw_peak_force_n']:.7f} N; "
         f"max cart {closed_loop['track_peak_abs_m']:.7f} m; "
