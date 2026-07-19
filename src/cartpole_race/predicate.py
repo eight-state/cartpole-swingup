@@ -1,4 +1,4 @@
-"""The sole continuous success predicate for the N5 release."""
+"""The sole sampled success predicate for the N5 release."""
 
 from __future__ import annotations
 
