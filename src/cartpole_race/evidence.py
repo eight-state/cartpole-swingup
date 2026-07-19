@@ -19,8 +19,8 @@ RUNTIME_SHA256 = {
     "src/cartpole_race/dynamics.py": "6dfb65eae3128ea1a77ae0693ca91d6d3e0cf5fce48aa6d203282b8db22a5468",
     "src/cartpole_race/env_spec.py": "fed1475f165f480bdc50cf0c88d500d3220f4d091f7c81b8407dc97ff2da4e7d",
     "src/cartpole_race/lqr.py": "5e597d7cbce094e8b433024e18e2165acfc24559a97713d88b88bd01571a2772",
-    "src/cartpole_race/predicate.py": "fbdd7263d9882395b329a5e52166a54d0a3a08fce62225c04d6e7ac4f534f31d",
-    "src/cartpole_race/release.py": "dabf546ac519e3c2b55391b252057a02ffed6fe548fa556408faf2275f81b788",
+    "src/cartpole_race/predicate.py": "814f88443b1fa4017a4e575e2b6a971bb61217de8ea1ca0b95e0b4501a43e8fe",
+    "src/cartpole_race/release.py": "ea8367580f1f4152f6b315584daccec1b777a7f622299fff445911e183046f6c",
     "src/cartpole_race/tvlqr.py": "889b815f6a32dccf8e471ebe20bde0349cf40359e698b0051b28f80371127a7c",
 }
 

@@ -192,7 +192,7 @@ def run_live(stack: ReleaseStack | None = None) -> LiveRun:
 def _require_live_baseline(metrics: dict[str, Any]) -> None:
     predicate = metrics["predicate"]
     checks = (
-        (predicate["success"], "fresh trajectory failed the continuous success predicate"),
+        (predicate["success"], "fresh trajectory failed the sampled success predicate"),
         (
             math.isclose(
                 predicate["final_hold_s"],
