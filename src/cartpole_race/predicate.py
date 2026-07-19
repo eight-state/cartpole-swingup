@@ -34,7 +34,7 @@ def in_success_set(
 def final_hold_s(
     model: NLinkCartPole, states: np.ndarray, control_dt_s: float
 ) -> float:
-    """Return the continuous duration represented by the final in-set samples."""
+    """Return the elapsed time spanned by final sampled 1 kHz in-set states."""
     samples = 0
     for state in np.asarray(states)[::-1]:
         if not in_success_set(model, state):
