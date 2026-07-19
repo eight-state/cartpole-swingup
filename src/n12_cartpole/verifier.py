@@ -120,8 +120,36 @@ def _audit_banked_gate(record: dict[str, Any]) -> dict[str, int | float]:
     return {"seed": int(record["seed"]), "successes": successes, "trials": len(results)}
 
 
+def _historical_summary(evidence: dict[str, Any]) -> dict[str, Any]:
+    """Map immutable legacy evidence into a provenance-limited historical summary."""
+    historic = evidence["unperturbed_achievement"]["historic_observation"]
+    return {
+        "classification": "immutable_historical_summary_not_live_evidence",
+        "legacy_input_field_mapping": {"continuous_hold_s": "sampled_hold_s"},
+        "provenance_limitations": {
+            "historic_nominal_path": "runs/r2/nom_n12_4ms_fast.npz",
+            "historic_nominal_path_present_in_checkout": False,
+            "historic_nominal_digest_retained": False,
+            "primary_trial_inputs_retained": False,
+            "primary_trial_traces_retained": False,
+        },
+        "stored_observation": {
+            "duration_s": historic["duration_s"],
+            "raw_and_applied_force_peak_n": historic[
+                "raw_and_applied_force_peak_n"
+            ],
+            "peak_abs_cart_m": historic["peak_abs_cart_m"],
+            "switch_max_wrapped_link_angle_deg": historic[
+                "switch_max_wrapped_link_angle_deg"
+            ],
+            "switch_max_link_rate_rad_s": historic["switch_max_link_rate_rad_s"],
+            "sampled_hold_s": historic["continuous_hold_s"],
+        },
+    }
+
+
 def audit_loaded_evidence() -> dict[str, Any]:
-    """Audit frozen nominal bytes and all three loaded banked gate records."""
+    """Audit frozen inputs and label historical data as a limited stored summary."""
     evidence = _read_evidence()
     _require(evidence.get("schema_version") == 1, "unexpected evidence schema")
     _require(evidence.get("release") == "N12", "unexpected evidence release")
@@ -148,8 +176,10 @@ def audit_loaded_evidence() -> dict[str, Any]:
         evidence["banked_gate"]["summary"] == {"successes": successes, "trials": trials},
         "banked summary disagrees with records",
     )
+    historical_summary = _historical_summary(evidence)
     return {
         "evidence": evidence,
+        "historical_summary": historical_summary,
         "frozen_nominal": {
             "sha256": nominal_claim["sha256"],
             "state_shape": list(nominal.states.shape),
@@ -173,9 +203,7 @@ def run_verifier() -> dict[str, Any]:
             np.repeat(rollout.nominal.controls, 4),
         )
     )
-    historic = loaded["evidence"]["unperturbed_achievement"][
-        "historic_observation"
-    ]
+    historic = loaded["historical_summary"]["stored_observation"]
     switch_state = live["success_set"]["switch_state"]
     live_observation = {
         "duration_s": live["execution"]["duration_s"],
@@ -185,7 +213,7 @@ def run_verifier() -> dict[str, Any]:
             "max_wrapped_link_angle_deg"
         ],
         "switch_max_link_rate_rad_s": switch_state["max_link_rate_rad_s"],
-        "continuous_hold_s": live["success_set"]["continuous_hold_s"],
+        "sampled_hold_s": live["success_set"]["sampled_hold_s"],
     }
     observation_deltas = {
         key: float(live_observation[key] - historic[key])
@@ -196,10 +224,6 @@ def run_verifier() -> dict[str, Any]:
         "no_nominal_synthesis_supported": loaded["evidence"]["capabilities"]["nominal_synthesis"] is False,
         "banked_gates_are_loaded_not_rerun": loaded["evidence"]["capabilities"]["perturbed_gate_rerun"] is False,
         "reference_is_reset_densified_from_loaded_nominal": reference_ok,
-        "platform_stable_witness_matches": bool(
-            abs(observation_deltas["duration_s"]) <= 1e-12
-            and abs(observation_deltas["continuous_hold_s"]) <= 1e-12
-        ),
         "exact_hanging_start": bool(
             np.array_equal(rollout.states[0], rollout.model.x_equilibrium("down"))
         ),
@@ -210,17 +234,17 @@ def run_verifier() -> dict[str, Any]:
         "no_simulator_clipping": live["forces"]["first_clipping"] is None,
         "track_bound": live["track"]["first_exceedance"] is None,
         "switch_in_locked_success_set": live["success_set"]["switch_state"]["in_success_set"],
-        "continuous_locked_hold_at_least_5_s": live["success_set"]["continuous_hold_s"] >= 5.0,
-        "full_static_window_in_locked_success_set": live["success_set"][
-            "every_state_from_switch_through_final_in_success_set"
-        ],
+        "sampled_locked_hold_at_least_5_s": live["success_set"]["sampled_hold_s"] >= 5.0,
+        "full_static_window_has_every_1khz_sample_in_success_set": live[
+            "success_set"
+        ]["every_1khz_sample_from_switch_through_final_in_success_set"],
     }
     return {
         "schema_version": 1,
         "loaded": {
             "frozen_nominal": loaded["frozen_nominal"],
             "banked_gate": loaded["banked_gate"],
-            "historic_unperturbed_observation": loaded["evidence"]["unperturbed_achievement"],
+            "historical_summary": loaded["historical_summary"],
         },
         "recomputed": {
             "live_rollout": live,
