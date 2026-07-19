@@ -274,7 +274,7 @@ def run_unperturbed(stack: ReleaseStack | None = None) -> LiveRun:
         },
         "live_closed_loop": {
             "handoff_max_angle_error_deg": handoff_deg,
-            "longest_continuous_hold_s": hold_s,
+            "longest_sampled_hold_s": hold_s,
             "track_peak_abs_m": track_peak,
             "applied_peak_force_n": float(np.max(np.abs(applied_controls))),
             "raw_peak_force_n": float(np.max(np.abs(raw))),
@@ -340,7 +340,7 @@ def render_live_gif(run: LiveRun, model: NLinkCartPole, horizon_s: float, output
 
 
 def audit_banked_gate_evidence() -> dict[str, Any]:
-    """Verify immutable historical gate records without presenting them as live runs."""
+    """Hash stored records, validate metadata, count flags, and rederive Wilson intervals."""
     rows: list[dict[str, Any]] = []
     total_successes = total_trials = 0
     for filename, expected_sha in BANKED_GATE_SHA256.items():
@@ -376,7 +376,11 @@ def audit_banked_gate_evidence() -> dict[str, Any]:
         total_successes += successes
         total_trials += trials
     return {
-        "status": "banked evidence audited; no perturbed cases were rerun",
+        "status": (
+            "stored historical records hashed; metadata validated; stored success flags "
+            "counted; Wilson intervals recomputed; historical outcomes not re-evaluated; "
+            "perturbations not rerun"
+        ),
         "files": rows,
         "total_successes": total_successes,
         "total_trials": total_trials,
