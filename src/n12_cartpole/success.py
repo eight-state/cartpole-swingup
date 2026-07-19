@@ -134,9 +134,9 @@ def assess_rollout(rollout: LiveRollout) -> dict[str, Any]:
             "raw_peak_abs_n": float(np.max(np.abs(rollout.raw_forces))),
         },
         "success_set": {
-            "continuous_hold_s": hold_duration_s,
-            "continuous_hold_samples": hold_samples,
-            "every_state_from_switch_through_final_in_success_set": bool(
+            "sampled_hold_s": hold_duration_s,
+            "sampled_hold_samples": hold_samples,
+            "every_1khz_sample_from_switch_through_final_in_success_set": bool(
                 np.all(hold_in_set)
             ),
             "first_hold_state_out_of_success_set": _first_event(
