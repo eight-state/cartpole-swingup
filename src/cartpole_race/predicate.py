@@ -1,4 +1,4 @@
-"""The locked elapsed-time success predicate for the N11 replay."""
+"""The locked 1 kHz sampled-state success predicate for the N11 replay."""
 
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ def in_success_set(
 def longest_continuous_hold_s(
     model, states: np.ndarray, control_dt_s: float
 ) -> float:
-    """Return the longest contiguous interval in the released success set."""
+    """Return the longest interval across consecutive 1 kHz logged states in the success set."""
     run = best = 0
     for state in states:
         run = run + 1 if in_success_set(model, state) else 0
