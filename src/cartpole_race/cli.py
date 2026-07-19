@@ -45,7 +45,7 @@ def demo_main() -> int:
     )
     print(
         f"[live] handoff {closed_loop['handoff_max_angle_error_deg']:.4f} deg; "
-        f"hold {closed_loop['longest_continuous_hold_s']:.1f} s; "
+        f"hold {closed_loop['longest_sampled_hold_s']:.1f} s; "
         f"applied/raw peak {closed_loop['applied_peak_force_n']:.1f}/"
         f"{closed_loop['raw_peak_force_n']:.1f} N; clips {closed_loop['clip_ticks']} -> "
         f"{'PASS' if closed_loop['passed'] else 'FAIL'}"
@@ -58,7 +58,7 @@ def demo_main() -> int:
 
 
 def _verify_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Audit banked n=10 evidence and rerun the live stack.")
+    parser = argparse.ArgumentParser(description="Audit stored n=10 evidence and rerun the live stack.")
     parser.add_argument(
         "--output-dir",
         type=Path,
@@ -86,11 +86,11 @@ def verify_main() -> int:
     )
     print(
         f"[banked gate audit] {banked_gate['total_successes']}/{banked_gate['total_trials']} rows; "
-        "historical records only, not a fresh perturbation rerun"
+        "stored historical records only; outcomes not re-evaluated and perturbations not rerun"
     )
     fresh = live.metrics["live_closed_loop"]
     print(
-        f"[same live stack] hold {fresh['longest_continuous_hold_s']:.1f} s; "
+        f"[same live stack] hold {fresh['longest_sampled_hold_s']:.1f} s; "
         f"applied/raw peak {fresh['applied_peak_force_n']:.1f}/{fresh['raw_peak_force_n']:.1f} N; "
         f"clips {fresh['clip_ticks']} -> {'PASS' if fresh['passed'] else 'FAIL'}"
     )
