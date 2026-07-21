@@ -1,0 +1,27 @@
+{
+  "release": "N14",
+  "schema_version": 1,
+  "sha256": {
+    ".gitattributes": "90e8eabdf3edf09d660405d24b94cf46347a12fed766934f6f93d3de5ba75b4e",
+    ".github/workflows/verify.yml": "c889834aa42a0059f8f53bbb3a7e2d3502877db8ccffd9e1108ea94a9d95c3a0",
+    ".gitignore": "e63675289fc76f57ec3f722f6d51acbacdda26d3ba0996720cd383895c7db930",
+    "LICENSE": "d6b80ac096e63a6af933c8493ef5071c4ff749e06d5610337aab6f9b4cd0ed86",
+    "PROVENANCE.md": "ca669529bdcd8eb9d1705f199ed16d9fb4d0ad822e5d7c24088e1351680025a9",
+    "README.md": "d2c7672bbb11c7b75b25f10dd72bc3766561a9d754369b08bfee043fa455b340",
+    "docs/METHOD.md": "61788a3c8161cae2c921b616d5f78e75937675bf03097627fa6d5b390e406983",
+    "docs/RELEASE_EVIDENCE.md": "24c1f3335160e7f8df478ea1aac2cf2010d6e3485be95ca1ee3c8c798929f8fc",
+    "pyproject.toml": "40b5e51f3d57dc1d3271ba75b2aea21efc624428be0e7aea6f3f9b5f08ca0f8f",
+    "src/cartpole_race/__init__.py": "338d2ee651a473ae73e2a876a23783a92c1f128976d2047567392a1a65641cd9",
+    "src/cartpole_race/dynamics.py": "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46",
+    "src/cartpole_race/env_spec.py": "bb0a6b1c41403ee712b6ab0888c9b03486e327f0adba2a554bf072a989ce318d",
+    "src/n14_cartpole/__init__.py": "b1509ed2d715800ecb19c7b2f4a77cf54bc0a210612264fc2c9349a163aa2f8a",
+    "src/n14_cartpole/release.py": "3cbeb37e31486e5841dbbd2cdb4834569d4344f0353f71f5ad8c60eedae2098a",
+    "src/n14_cartpole/release_audit.py": "390749e7a1fb8e89c5eb482eeebca14897cfe2408b25c08c7e533c5901844d07",
+    "src/n14_cartpole/success.py": "d976f237ae93d829bb52d1cf7c1d94335fc362130696ff7445042104fb032aca",
+    "src/n14_cartpole/verifier.py": "72be035dc968e7c2ae318bd9e63f998dd829b0bc02ade6f3e6ad95cbdd91c6d2",
+    "tests/test_integrity.py": "39602128326d4390a8ab8c2ebb8eaa5b851f9c9b256fb1d997a1c05ddc48e0c6",
+    "tests/test_success.py": "df37004b37f1963f93c507302e3b5b17bb19eda68e16a18193b0ca4ad80ab046",
+    "tests/test_verifier.py": "d3c35030ebec8cd71aefe1f9af997ccde7c391a5f7426f06f09e30fc2ccb566b",
+    "uv.lock": "cd7e912ef41d0c61e8e0385e5fe39c552646a2279f19f09390a27c16509a48c2"
+  }
+}

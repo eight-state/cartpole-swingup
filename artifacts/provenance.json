@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "release": "N14",
+  "sole_parent_sha256": "fffb9466ee0be82646867ed6c8f13748827a2d157144eb0c81cfe642fc0a005b",
+  "fullmass_nominal_source_sha256": "4d1c722e527a62c6989b69d9550e6e22b98211619515c3e476086bfc48a06799",
+  "candidate_tracker_sha256": "26fac86ec5299bc8450973d3b6af24805cebe8c43612d45f2d983d6d7c63ea6f",
+  "fresh_tracker_sha256": "26fac86ec5299bc8450973d3b6af24805cebe8c43612d45f2d983d6d7c63ea6f",
+  "candidate_hold_sha256": "9b0f768463f2bc962fdeb371ac06ef3301dd2dd31c9e8f9203a844514e1dd730",
+  "fresh_hold_sha256": "9b0f768463f2bc962fdeb371ac06ef3301dd2dd31c9e8f9203a844514e1dd730",
+  "composed_proof_sha256": "a3e01e603334b304bd191fffb6ca5f7cffdf16e16477f75f664df456126953e3",
+  "fresh_reproduction": {
+    "switch_tick": 6009,
+    "tracker_arrays_bitwise_equal": true,
+    "hold_arrays_bitwise_equal": true,
+    "maximum_state_delta": 0.0,
+    "maximum_control_delta": 0.0,
+    "maximum_gain_delta": 0.0
+  }
+}
