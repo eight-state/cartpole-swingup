@@ -54,7 +54,18 @@ def _authority_failure() -> dict[str, object]:
 
 def test_locked_witness_replays_to_certifying_pass() -> None:
     result = verifier.run_verifier()
-    assert result["verdict"] == "PASS", result
+    if result["verdict"] != "PASS":
+        pytest.fail(
+            json.dumps(
+                {
+                    "failures": result["failures"],
+                    "expected_witness": result["expected_witness"],
+                    "metrics": result["metrics"],
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
     assert result["failures"] == []
     assert result["metrics"]["control_count"] == 22009
     assert result["metrics"]["state_count"] == 22010
