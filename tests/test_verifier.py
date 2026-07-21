@@ -53,7 +53,7 @@ def _authority_failure() -> dict[str, object]:
 
 def test_locked_witness_replays_to_retained_pass_report() -> None:
     result = verifier.run_verifier()
-    assert result["verdict"] == "PASS"
+    assert result["verdict"] == "PASS", result
     assert result["failures"] == []
     assert result["metrics"]["control_count"] == 22009
     assert result["metrics"]["state_count"] == 22010
