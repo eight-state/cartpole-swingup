@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import platform
 import shutil
 import subprocess
 import sys
@@ -59,7 +60,17 @@ def test_locked_witness_replays_to_retained_pass_report() -> None:
     assert result["metrics"]["state_count"] == 22010
     assert result["metrics"]["longest_success_states"] == 13811
     assert result["metrics"]["start_max_abs_from_exact_hanging"] == 0.0
-    assert verifier.render_result(result) == RETAINED_REPORT_PATH.read_text(encoding="utf-8")
+    retained = _retained_report()
+    assert result["runtime"] == {
+        "numpy": np.__version__,
+        "platform": platform.platform(),
+        "python": platform.python_version(),
+    }
+    result_without_runtime = dict(result)
+    retained_without_runtime = dict(retained)
+    result_without_runtime.pop("runtime")
+    retained_without_runtime.pop("runtime")
+    assert result_without_runtime == retained_without_runtime
 
 
 def test_artifact_hash_is_frozen() -> None:

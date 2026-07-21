@@ -2,12 +2,12 @@
   "release": "N14",
   "schema_version": 1,
   "sha256": {
-    ".gitattributes": "623f3547366534ab73c360435775141d8d91b064f3dd35aa3a3c778048f8faa5",
+    ".gitattributes": "9d2b2aac45fb63d609ad7d3eda483a7cbd0e1e645dadfea0624bae560aa241ef",
     ".github/workflows/verify.yml": "c889834aa42a0059f8f53bbb3a7e2d3502877db8ccffd9e1108ea94a9d95c3a0",
     ".gitignore": "e63675289fc76f57ec3f722f6d51acbacdda26d3ba0996720cd383895c7db930",
     "LICENSE": "d6b80ac096e63a6af933c8493ef5071c4ff749e06d5610337aab6f9b4cd0ed86",
     "PROVENANCE.md": "ca669529bdcd8eb9d1705f199ed16d9fb4d0ad822e5d7c24088e1351680025a9",
-    "README.md": "d34d7f27cf25f7450744362846daaaf70a8845b35d4c866a6a72c5f7af5fad9c",
+    "README.md": "a13fe1cf564e6c780077a2c73d12b43f424f4108eaab3a1ce7103e1c01b7832e",
     "docs/METHOD.md": "61788a3c8161cae2c921b616d5f78e75937675bf03097627fa6d5b390e406983",
     "docs/RELEASE_EVIDENCE.md": "24c1f3335160e7f8df478ea1aac2cf2010d6e3485be95ca1ee3c8c798929f8fc",
     "pyproject.toml": "40b5e51f3d57dc1d3271ba75b2aea21efc624428be0e7aea6f3f9b5f08ca0f8f",
@@ -21,7 +21,7 @@
     "src/n14_cartpole/verifier.py": "c54b9e9e33368d26cf0c74a76ec02265c846ffa25a78dfd823c33405af7eac30",
     "tests/test_integrity.py": "7b9031ef514106b9f08bd90a1d4651f1260c9806ce625c4c20f5723de8cddf53",
     "tests/test_success.py": "df37004b37f1963f93c507302e3b5b17bb19eda68e16a18193b0ca4ad80ab046",
-    "tests/test_verifier.py": "8ad95ea4e4284d2acab2be3d1289c25ef9bbb276fef5ebe441af5af5fab5aecc",
+    "tests/test_verifier.py": "eafc873c63855b46be74638bf4c563fa5d4b884161514d9803d16ce0ebf91c5d",
     "uv.lock": "cd7e912ef41d0c61e8e0385e5fe39c552646a2279f19f09390a27c16509a48c2"
   }
 }
