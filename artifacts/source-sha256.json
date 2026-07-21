@@ -7,9 +7,9 @@
     ".gitignore": "e63675289fc76f57ec3f722f6d51acbacdda26d3ba0996720cd383895c7db930",
     "LICENSE": "d6b80ac096e63a6af933c8493ef5071c4ff749e06d5610337aab6f9b4cd0ed86",
     "PROVENANCE.md": "ca669529bdcd8eb9d1705f199ed16d9fb4d0ad822e5d7c24088e1351680025a9",
-    "README.md": "a13fe1cf564e6c780077a2c73d12b43f424f4108eaab3a1ce7103e1c01b7832e",
+    "README.md": "53e9e9d5aa8caf16151cd72025be3e8f05776e9e05e8632d68ef2e61f3d93fe4",
     "docs/METHOD.md": "61788a3c8161cae2c921b616d5f78e75937675bf03097627fa6d5b390e406983",
-    "docs/RELEASE_EVIDENCE.md": "24c1f3335160e7f8df478ea1aac2cf2010d6e3485be95ca1ee3c8c798929f8fc",
+    "docs/RELEASE_EVIDENCE.md": "8fdd36b88f545f6ccf5d68f784c70f35b87df36f566162319db1900ca2095f74",
     "pyproject.toml": "40b5e51f3d57dc1d3271ba75b2aea21efc624428be0e7aea6f3f9b5f08ca0f8f",
     "src/cartpole_race/__init__.py": "338d2ee651a473ae73e2a876a23783a92c1f128976d2047567392a1a65641cd9",
     "src/cartpole_race/dynamics.py": "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46",
@@ -18,10 +18,10 @@
     "src/n14_cartpole/release.py": "0c485928e2cc7d148c1fd3aee63ab9fcaeee9f166985bb5747070ab08f05f1e0",
     "src/n14_cartpole/release_audit.py": "e365b8a609e63187553cdfec17b6f0cf9e182df2950808a219fd69167c0a1b89",
     "src/n14_cartpole/success.py": "d976f237ae93d829bb52d1cf7c1d94335fc362130696ff7445042104fb032aca",
-    "src/n14_cartpole/verifier.py": "c54b9e9e33368d26cf0c74a76ec02265c846ffa25a78dfd823c33405af7eac30",
+    "src/n14_cartpole/verifier.py": "136c9f1ec2ea86f654b887508c08de0c153e149f9824ca7d210949dcb52313e8",
     "tests/test_integrity.py": "7b9031ef514106b9f08bd90a1d4651f1260c9806ce625c4c20f5723de8cddf53",
     "tests/test_success.py": "df37004b37f1963f93c507302e3b5b17bb19eda68e16a18193b0ca4ad80ab046",
-    "tests/test_verifier.py": "eafc873c63855b46be74638bf4c563fa5d4b884161514d9803d16ce0ebf91c5d",
+    "tests/test_verifier.py": "d0eb4176138e8975c1800a914ef23271077e930669a368414b9671e34e11c766",
     "uv.lock": "cd7e912ef41d0c61e8e0385e5fe39c552646a2279f19f09390a27c16509a48c2"
   }
 }

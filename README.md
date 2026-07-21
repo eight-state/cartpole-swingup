@@ -22,6 +22,8 @@ uv run pytest
 
 `n14-release` atomically regenerates `artifacts/verification.json` after a complete PASS. Both console commands require the source capsule. An installed wheel returns `source_capsule_required` and exits 1.
 
+The retained report records the original host's exact metrics. The live gate requires the frozen hashes, physical bounds, exact hanging start, and at least 5,001 trailing success states. Exact host-to-host metric comparisons remain diagnostic.
+
 ## Locked result
 
 - Fourteen links: 0.10 kg and 0.50 m each
@@ -42,7 +44,7 @@ uv run pytest
 - [`docs/RELEASE_EVIDENCE.md`](docs/RELEASE_EVIDENCE.md): witness metrics and provenance links.
 - [`PROVENANCE.md`](PROVENANCE.md): source lineage and archive hashes.
 - [`artifacts/MANIFEST.json`](artifacts/MANIFEST.json): three frozen artifact hashes.
-- [`artifacts/source-sha256.json`](artifacts/source-sha256.json): 21 audited source hashes.
+- [`artifacts/source-sha256.json`](artifacts/source-sha256.json): audited source hashes.
 
 ## Scope
 

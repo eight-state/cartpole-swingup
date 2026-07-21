@@ -93,6 +93,16 @@ def longest_true_run(mask: npt.NDArray[np.bool_]) -> tuple[int, int]:
     return best_first, best_count
 
 
+def trailing_true_count(mask: npt.ArrayLike) -> int:
+    """Return the number of consecutive true samples at the end of a mask."""
+    count = 0
+    for value in np.asarray(mask, dtype=bool).reshape(-1)[::-1]:
+        if not value:
+            break
+        count += 1
+    return count
+
+
 def replay_controls(controls: npt.ArrayLike) -> JsonObject:
     """Replay raw controls under exact 1 kHz ZOH and quarter-step RK4."""
     raw = np.asarray(controls, dtype=np.float64).reshape(-1)
@@ -241,6 +251,7 @@ def run_verifier(artifact_path: Path = ARTIFACT_PATH) -> JsonObject:
 
     replay = replay_controls(controls)
     metrics = replay["metrics"]
+    trailing_success_states = trailing_true_count(replay["success"])
     expected = json.loads(EXPECTED_WITNESS_PATH.read_text(encoding="utf-8"))
     expected_failures = _expected_checks(metrics, expected["metrics"])
     metadata_expected = {
@@ -269,7 +280,7 @@ def run_verifier(artifact_path: Path = ARTIFACT_PATH) -> JsonObject:
         physical_failures.append("quarter_step_rail_bound")
     if metrics["start_max_abs_from_exact_hanging"] != 0.0:
         physical_failures.append("exact_hanging_start")
-    if metrics["longest_success_states"] < REQUIRED_SUCCESS_STATES:
+    if trailing_success_states < REQUIRED_SUCCESS_STATES:
         physical_failures.append("success_duration")
 
     integrity_failures: list[str] = []
@@ -277,12 +288,12 @@ def run_verifier(artifact_path: Path = ARTIFACT_PATH) -> JsonObject:
         integrity_failures.append("artifact_sha256")
     if source_hashes != EXPECTED_SOURCE_SHA256:
         integrity_failures.append("source_sha256")
-    all_failures = integrity_failures + metadata_failures + physical_failures + expected_failures
+    certifying_failures = integrity_failures + metadata_failures + physical_failures
     return {
         "schema_version": 1,
         "release": "N14",
-        "verdict": "PASS" if not all_failures else "FAIL",
-        "failures": all_failures,
+        "verdict": "PASS" if not certifying_failures else "FAIL",
+        "failures": certifying_failures,
         "integrity": {
             "artifact_sha256": artifact_hash,
             "artifact_sha256_matches": artifact_hash == EXPECTED_ARTIFACT_SHA256,

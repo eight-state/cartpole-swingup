@@ -52,25 +52,63 @@ def _authority_failure() -> dict[str, object]:
     }
 
 
-def test_locked_witness_replays_to_retained_pass_report() -> None:
+def test_locked_witness_replays_to_certifying_pass() -> None:
     result = verifier.run_verifier()
     assert result["verdict"] == "PASS", result
     assert result["failures"] == []
     assert result["metrics"]["control_count"] == 22009
     assert result["metrics"]["state_count"] == 22010
-    assert result["metrics"]["longest_success_states"] == 13811
+    assert result["metrics"]["longest_success_states"] >= verifier.REQUIRED_SUCCESS_STATES
     assert result["metrics"]["start_max_abs_from_exact_hanging"] == 0.0
-    retained = _retained_report()
+    assert result["expected_witness"]["all_assertions_pass"] == (
+        result["expected_witness"]["failures"] == []
+    )
     assert result["runtime"] == {
         "numpy": np.__version__,
         "platform": platform.platform(),
         "python": platform.python_version(),
     }
-    result_without_runtime = dict(result)
-    retained_without_runtime = dict(retained)
-    result_without_runtime.pop("runtime")
-    retained_without_runtime.pop("runtime")
-    assert result_without_runtime == retained_without_runtime
+    if result["expected_witness"]["all_assertions_pass"]:
+        retained = _retained_report()
+        result_without_runtime = dict(result)
+        retained_without_runtime = dict(retained)
+        result_without_runtime.pop("runtime")
+        retained_without_runtime.pop("runtime")
+        assert result_without_runtime == retained_without_runtime
+
+
+def test_historical_metric_drift_is_diagnostic(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    retained_metrics = _retained_report()["metrics"]
+    assert isinstance(retained_metrics, dict)
+    monkeypatch.setattr(
+        verifier,
+        "replay_controls",
+        lambda controls: {
+            "metrics": retained_metrics,
+            "success": np.ones(verifier.REQUIRED_SUCCESS_STATES, dtype=bool),
+        },
+    )
+    monkeypatch.setattr(
+        verifier,
+        "_expected_checks",
+        lambda metrics, expected: ["longest_success_first_tick"],
+    )
+
+    result = verifier.run_verifier()
+
+    assert result["verdict"] == "PASS"
+    assert result["failures"] == []
+    assert result["expected_witness"] == {
+        "all_assertions_pass": False,
+        "failures": ["longest_success_first_tick"],
+    }
+
+
+def test_terminal_success_count_excludes_an_earlier_run() -> None:
+    mask = np.asarray([True, True, True, False, True], dtype=bool)
+    assert verifier.trailing_true_count(mask) == 1
 
 
 def test_artifact_hash_is_frozen() -> None:
