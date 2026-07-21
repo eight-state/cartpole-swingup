@@ -1,6 +1,6 @@
 # Quattuordecuple Cart-Pole
 
-This repository reproduces the N14 cart-pole release from frozen controls in deterministic simulation.
+This repository packages the frozen controls, locked model, verifier, and release evidence for one N14 deterministic simulation.
 
 ![N14 cart-pole swing-up and balance](docs/n14-demo.gif)
 
@@ -11,7 +11,7 @@ uv sync --locked
 uv run n14-verify
 ```
 
-`n14-verify` returns PASS only when the three frozen artifacts, 21 source hashes, exact-hanging replay, force bound, quarter-step rail bound, and success-run checks all pass. The command prints one JSON report and exits nonzero when an assertion fails.
+`n14-verify` returns PASS only when the three frozen artifacts, 21 source hashes, exact-hanging replay, force bound, quarter-step rail bound, and 5,001-state trailing-success gate all pass. The command prints one JSON report and exits nonzero when an assertion fails.
 
 ```text
 uv run n14-release
@@ -22,7 +22,7 @@ uv run pytest
 
 `n14-release` atomically regenerates `artifacts/verification.json` after a complete PASS. Both console commands require the source capsule. An installed wheel returns `source_capsule_required` and exits 1.
 
-The retained report records the original host's exact metrics. The live gate requires the frozen hashes, physical bounds, exact hanging start, and at least 5,001 trailing success states. Exact host-to-host metric comparisons remain diagnostic.
+The retained report records the release host's exact metrics. The raw-control replay is numerically host-sensitive: compatible hosts return PASS, while other hosts can diverge enough to fail the physical gate. GitHub Actions audits the authority boundary and non-replay behavior; it does not certify the numerical trajectory.
 
 ## Locked result
 

@@ -52,6 +52,7 @@ def _authority_failure() -> dict[str, object]:
     }
 
 
+@pytest.mark.numerical_replay
 def test_locked_witness_replays_to_certifying_pass() -> None:
     result = verifier.run_verifier()
     if result["verdict"] != "PASS":

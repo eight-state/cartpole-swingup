@@ -19,4 +19,6 @@ Machine-readable hashes and reproduction facts are in `artifacts/provenance.json
 
 ## Acceptance boundary
 
-The live verifier requires the frozen artifact and source hashes, exact hanging start, finite controls and states, the force and quarter-step rail limits, and at least 5,001 trailing success states. It reports exact comparisons with the retained host metrics as diagnostics because numerical hosts can shift the first success tick without changing the live physical gate.
+The live verifier requires the frozen artifact and source hashes, exact hanging start, finite controls and states, the force and quarter-step rail limits, and at least 5,001 trailing success states. It reports exact comparisons with the retained host metrics as diagnostics.
+
+The raw-control replay is numerically host-sensitive. A compatible host returns PASS. Other hosts can diverge enough to fail the live physical gate. `artifacts/verification.json` records the release host and does not establish cross-platform replay equivalence. GitHub Actions checks the artifact and source authority boundary plus non-replay behavior; it does not certify the numerical trajectory.
