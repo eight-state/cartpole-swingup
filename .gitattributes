@@ -1,6 +1,12 @@
+* text=auto eol=lf
 *.npz binary
 *.json text eol=lf
 *.md text eol=lf
 *.py text eol=lf
 *.toml text eol=lf
 *.yml text eol=lf
+
+# These retained release records are hashed as raw bytes.
+artifacts/MANIFEST.json binary -text
+artifacts/source-sha256.json binary -text
+artifacts/verification.json binary -text

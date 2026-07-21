@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
+import os
 import platform
+import tempfile
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
@@ -15,6 +16,12 @@ import numpy.typing as npt
 
 from cartpole_race.dynamics import NLinkCartPole
 from cartpole_race.env_spec import CartPoleSpec
+from n14_cartpole.release_audit import (
+    REPOSITORY,
+    audit_release,
+    locate_source_capsule,
+    sha256,
+)
 from n14_cartpole.success import (
     MAX_ABS_CART_M,
     MAX_ABS_CART_RATE_M_S,
@@ -28,7 +35,6 @@ from n14_cartpole.success import (
 FloatArray = npt.NDArray[np.float64]
 JsonObject = dict[str, Any]
 
-REPOSITORY = Path(__file__).resolve().parents[2]
 ARTIFACT_PATH = REPOSITORY / "artifacts" / "n14-witness.npz"
 EXPECTED_WITNESS_PATH = REPOSITORY / "artifacts" / "expected-witness.json"
 
@@ -48,15 +54,6 @@ EXPECTED_SOURCE_SHA256 = {
 }
 SOLE_PARENT_SHA256 = "fffb9466ee0be82646867ed6c8f13748827a2d157144eb0c81cfe642fc0a005b"
 FULLMASS_SOURCE_SHA256 = "4d1c722e527a62c6989b69d9550e6e22b98211619515c3e476086bfc48a06799"
-
-
-def sha256(path: Path) -> str:
-    """Return the SHA-256 digest of one file."""
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def make_locked_model() -> NLinkCartPole:
@@ -163,14 +160,78 @@ def _expected_checks(metrics: JsonObject, expected: JsonObject) -> list[str]:
     return failures
 
 
+def _source_capsule_failure(reason: str) -> JsonObject:
+    return {
+        "schema_version": 1,
+        "release": "N14",
+        "verdict": "FAIL",
+        "failures": ["source_capsule_required"],
+        "source_capsule": {"reason": reason},
+    }
+
+
+def _authority_failure(audit: JsonObject) -> JsonObject:
+    return {
+        "schema_version": 1,
+        "release": "N14",
+        "verdict": "FAIL",
+        "failures": ["release_authority"],
+        "release_authority": audit,
+    }
+
+
+def _artifact_failure(artifact_path: Path, reason: str, digest: str | None = None) -> JsonObject:
+    return {
+        "schema_version": 1,
+        "release": "N14",
+        "verdict": "FAIL",
+        "failures": [reason],
+        "integrity": {
+            "artifact_path": str(artifact_path),
+            "artifact_sha256": digest,
+            "artifact_sha256_matches": False,
+        },
+    }
+
+
+def _source_capsule_root() -> tuple[Path | None, str | None]:
+    try:
+        capsule_root = locate_source_capsule()
+        expected_verifier = (capsule_root / "src" / "n14_cartpole" / "verifier.py").resolve()
+        executing_verifier = Path(__file__).resolve()
+    except (OSError, ValueError) as error:
+        return None, str(error)
+    if executing_verifier != expected_verifier:
+        return None, "executing_verifier_identity_mismatch"
+    return capsule_root, None
+
+
 def run_verifier(artifact_path: Path = ARTIFACT_PATH) -> JsonObject:
-    """Recompute all N14 witness claims from raw controls and locked physics."""
-    artifact_hash = sha256(artifact_path)
+    """Recompute N14 witness claims only after source-capsule authority passes."""
+    capsule_root, capsule_error = _source_capsule_root()
+    if capsule_error is not None or capsule_root is None:
+        return _source_capsule_failure(capsule_error or "source capsule is unavailable")
+
+    audit = audit_release()
+    if audit["verdict"] != "PASS":
+        return _authority_failure(audit)
+
+    try:
+        selected_artifact = Path(artifact_path)
+    except (TypeError, ValueError):
+        return _artifact_failure(Path("<invalid-artifact>"), "artifact_missing")
+    try:
+        artifact_hash = sha256(selected_artifact)
+    except (OSError, ValueError):
+        return _artifact_failure(selected_artifact, "artifact_missing")
+    if artifact_hash != EXPECTED_ARTIFACT_SHA256:
+        return _artifact_failure(selected_artifact, "artifact_sha256", artifact_hash)
+
     source_hashes = {
-        relative: sha256(REPOSITORY / relative)
+        relative: audit["sources"][relative]
         for relative in EXPECTED_SOURCE_SHA256
     }
-    with np.load(artifact_path, allow_pickle=False) as data:
+    with np.load(selected_artifact, allow_pickle=False) as data:
         controls = np.asarray(data["u"], dtype=np.float64).reshape(-1)
         metadata = {
             key: _metadata_scalar(data, key)
@@ -259,19 +320,56 @@ def run_verifier(artifact_path: Path = ARTIFACT_PATH) -> JsonObject:
     }
 
 
+def render_result(result: JsonObject) -> str:
+    """Render the retained report format without adding audit fields to PASS."""
+    return json.dumps(result, indent=2, sort_keys=True) + "\n"
+
+
+def _write_pass_output(path: Path, rendered: str) -> None:
+    """Atomically replace one output only after a complete PASS report exists."""
+    target = path.resolve()
+    descriptor, temporary_name = tempfile.mkstemp(
+        dir=target.parent,
+        prefix=f".{target.name}.",
+        suffix=".tmp",
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            stream.write(rendered)
+        os.replace(temporary, target)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+
+def _error_result(error: Exception) -> JsonObject:
+    return {
+        "schema_version": 1,
+        "release": "N14",
+        "verdict": "ERROR",
+        "failures": ["unexpected_error"],
+        "error": {"type": type(error).__name__, "message": str(error)},
+    }
+
+
 def cli(argv: Sequence[str] | None = None) -> int:
-    """Run the verifier and print or persist its JSON result."""
+    """Run the verifier and print or persist one JSON result."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--artifact", type=Path, default=ARTIFACT_PATH)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
-    result = run_verifier(args.artifact.resolve())
-    rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
-    if args.output is None:
+    try:
+        result = run_verifier(args.artifact)
+        rendered = render_result(result)
+        if result["verdict"] == "PASS" and args.output is not None:
+            _write_pass_output(args.output, rendered)
+            return 0
         print(rendered, end="")
-    else:
-        args.output.resolve().write_text(rendered, encoding="utf-8")
-    return 0 if result["verdict"] == "PASS" else 1
+        return 0 if result["verdict"] == "PASS" else 1
+    except Exception as error:
+        print(render_result(_error_result(error)), end="")
+        return 2
 
 
 if __name__ == "__main__":

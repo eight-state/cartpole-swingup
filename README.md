@@ -6,12 +6,28 @@ The checked witness starts from exact hanging, applies 22,009 raw 1 kHz controls
 
 ## Verify
 
+Verification is supported only from a complete source capsule containing:
+
+```text
+pyproject.toml
+artifacts/MANIFEST.json
+artifacts/source-sha256.json
+artifacts/n14-witness.npz
+artifacts/expected-witness.json
+artifacts/provenance.json
+src/n14_cartpole/verifier.py
+```
+
 ```bash
 uv sync --locked
 uv run n14-verify
 ```
 
-A passing run prints `"verdict": "PASS"`. The verifier reads only the frozen raw controls, reconstructs the locked plant, replays from exact hanging, audits force and quarter-step rail limits, and recomputes the success run.
+Before loading the witness or replaying any control, both `n14-verify` and `n14-release` require that capsule and audit the exact three immutable artifact rows and 21 source-lock rows. The executing verifier must be the capsule's `src/n14_cartpole/verifier.py`.
+
+A PASS on `n14-verify` prints one JSON report and exits 0. `n14-verify --output PATH` writes that same report atomically only on PASS; a FAIL prints one JSON report to stdout, exits 1, and leaves `PATH` untouched. `n14-release` applies the same rule to `artifacts/verification.json`. Invalid command syntax uses argparse usage on stderr and exits 2; an unexpected post-parse error emits one JSON `ERROR` report and exits 2.
+
+An installed wheel intentionally fails closed: both console commands emit a `FAIL` report containing `source_capsule_required` and exit 1. Wheels are not a supported verification environment.
 
 Run the complete local gate with:
 
@@ -21,8 +37,6 @@ uv run mypy
 uv run pytest
 uv run n14-release
 ```
-
-`n14-release` writes the recomputed report to `artifacts/verification.json`.
 
 ## Locked result
 
@@ -38,6 +52,8 @@ uv run n14-release
 - Quarter-step cart peak: 7.098485449991383 m
 - Longest success run: 13,811 states / 13.81 s
 
-This release proves one deterministic trajectory. It does not claim robustness to perturbations or a global region of attraction.
+A PASS is a deterministic replay of the frozen witness under the audited local source capsule. It is not a robustness, region-of-attraction, hardware, or independent publication-identity claim.
+
+Local Git history and in-tree locks establish reproducible current-tree consistency. They do not establish identity for an external reviewer until a commit, signed tag, or archive digest is published through a separately trusted channel, and they cannot prevent deliberate co-modification of executable code with mutable in-tree locks. This repair deliberately adds neither signing nor archive-authority machinery.
 
 See [METHOD](docs/METHOD.md), [RELEASE_EVIDENCE](docs/RELEASE_EVIDENCE.md), and [PROVENANCE](PROVENANCE.md).

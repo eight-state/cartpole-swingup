@@ -2,15 +2,17 @@
 
 from __future__ import annotations
 
+import argparse
 from collections.abc import Sequence
 
-from n14_cartpole.verifier import REPOSITORY, cli as verifier_cli
+from n14_cartpole.release_audit import REPOSITORY
+from n14_cartpole.verifier import cli as verifier_cli
 
 
 def cli(argv: Sequence[str] | None = None) -> int:
-    """Verify the release and write ``artifacts/verification.json``."""
-    if argv:
-        raise ValueError("n14-release accepts no arguments")
+    """Verify the release and atomically replace its report only on PASS."""
+    parser = argparse.ArgumentParser()
+    parser.parse_args(argv)
     return verifier_cli(["--output", str(REPOSITORY / "artifacts" / "verification.json")])
 
 
