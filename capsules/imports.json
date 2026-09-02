@@ -28,6 +28,20 @@
       "demo_command": "uv run n6-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger-audit+fresh-rerun"
+    },
+    {
+      "rung": 7,
+      "slug": "n07-septuple",
+      "source_url": "https://github.com/eight-state/septuple-cartpole",
+      "source_commit": "56c15ca1cde6454a1b5308657757402cc08e69c5",
+      "source_tree": "dc7a3354072f8b419214d3b2bdd899c3eca2a092",
+      "capsule_path": "capsules/n07-septuple",
+      "content_hash": "4c558358fbad68f84a314054a21b0b6628cd97d90ac0043dc5486a863f4cad57",
+      "file_count": 28,
+      "verification_command": "uv run n7-verify",
+      "demo_command": "uv run n7-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger+log-audit+fresh-rerun"
     }
   ]
 }
