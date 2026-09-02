@@ -1,5 +1,5 @@
-"""Registry tooling for immutable CartPole release capsules."""
+"""Shared CartPole swing-up implementation and rung registry."""
 
-from cartpole_capsules.manifest import CapsuleEntry, ManifestError
+from cartpole_capsules.adapters.base import RungConfig, load_registry
 
-__all__ = ["CapsuleEntry", "ManifestError"]
+__all__ = ["RungConfig", "load_registry"]

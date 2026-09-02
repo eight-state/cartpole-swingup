@@ -33,6 +33,7 @@ from cartpole_capsules.core.predicate import (
     trailing_hold_s,
 )
 from cartpole_capsules.core.render import render_cartpole_gif
+from cartpole_capsules.core.rollout import RolloutRecord, replay_controls, run_policy
 from cartpole_capsules.core.tvlqr import TVLQR, build_upright_tvlqr
 
 __all__ = [
@@ -62,6 +63,9 @@ __all__ = [
     "make_Q",
     "make_R",
     "render_cartpole_gif",
+    "RolloutRecord",
+    "replay_controls",
+    "run_policy",
     "static_lqr",
     "trailing_hold_s",
     "wrap_state_error",
