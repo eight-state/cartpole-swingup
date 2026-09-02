@@ -42,6 +42,20 @@
       "demo_command": "uv run n7-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger+log-audit+fresh-rerun"
+    },
+    {
+      "rung": 8,
+      "slug": "n08-octuple",
+      "source_url": "https://github.com/eight-state/octuple-cartpole",
+      "source_commit": "6e7576f8288e8e1512592cfba87138d4a6d62f31",
+      "source_tree": "f356d1f342cd3cabbedf30284fd6fb98200e3575",
+      "capsule_path": "capsules/n08-octuple",
+      "content_hash": "8d5b6838a1efaa2a319fd12bba2e7a1a8c7947be1e88005801a3ca11b6ca8965",
+      "file_count": 25,
+      "verification_command": "uv run --locked n8-verify",
+      "demo_command": "uv run --locked n8-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger-audit+fresh-rerun"
     }
   ]
 }

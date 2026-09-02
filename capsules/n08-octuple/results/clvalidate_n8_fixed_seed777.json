@@ -1,0 +1,213 @@
+{
+ "controller": "fixed_nominal_tvlqr_no_replan",
+ "n_success": 16,
+ "n_ic": 24,
+ "seed": 777,
+ "commit_sha": "5d3c2a7e7386e9b1477960436d0fc0e1a9794ad4",
+ "git_dirty": false,
+ "nominal_sha256": "dd3e64c87485649feb59d0cf2ded147732d70e955ce131911e41b96c22b20892",
+ "max_force_demanded_over_runs": 154910878.69,
+ "n_saturated_ics": 8,
+ "results": [
+  {
+   "tag": 0,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 136712092.877,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 1,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 92495233.749,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 2,
+   "success": true,
+   "peakF": 77.782,
+   "max_force_demanded": 77.782,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 3,
+   "success": true,
+   "peakF": 77.731,
+   "max_force_demanded": 77.731,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 4,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 89612113.814,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 5,
+   "success": true,
+   "peakF": 77.723,
+   "max_force_demanded": 77.723,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 6,
+   "success": true,
+   "peakF": 77.725,
+   "max_force_demanded": 77.725,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 7,
+   "success": true,
+   "peakF": 77.702,
+   "max_force_demanded": 77.702,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 8,
+   "success": true,
+   "peakF": 77.745,
+   "max_force_demanded": 77.745,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 9,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 120277905.255,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 10,
+   "success": true,
+   "peakF": 77.746,
+   "max_force_demanded": 77.746,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 11,
+   "success": true,
+   "peakF": 77.714,
+   "max_force_demanded": 77.714,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 12,
+   "success": true,
+   "peakF": 77.733,
+   "max_force_demanded": 77.733,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 13,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 154910878.69,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 14,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 102199784.594,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 15,
+   "success": true,
+   "peakF": 77.735,
+   "max_force_demanded": 77.735,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 16,
+   "success": true,
+   "peakF": 77.698,
+   "max_force_demanded": 77.698,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 17,
+   "success": true,
+   "peakF": 77.786,
+   "max_force_demanded": 77.786,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 18,
+   "success": true,
+   "peakF": 77.692,
+   "max_force_demanded": 77.692,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 19,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 138918621.468,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 20,
+   "success": true,
+   "peakF": 77.748,
+   "max_force_demanded": 77.748,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 21,
+   "success": true,
+   "peakF": 77.721,
+   "max_force_demanded": 77.721,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 22,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 91426140.107,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 23,
+   "success": true,
+   "peakF": 77.672,
+   "max_force_demanded": 77.672,
+   "saturated": false,
+   "track_ok": true
+  }
+ ]
+}

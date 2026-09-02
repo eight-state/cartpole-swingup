@@ -1,0 +1,9 @@
+.working/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+# stray local logs
+*.log
+MY_*.log
