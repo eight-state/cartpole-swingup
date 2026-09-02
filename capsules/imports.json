@@ -98,6 +98,20 @@
       "demo_command": "uv run n11-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger-audit+fresh-rerun"
+    },
+    {
+      "rung": 12,
+      "slug": "n12-duodecuple",
+      "source_url": "https://github.com/eight-state/duodecuple-cartpole",
+      "source_commit": "d7616824b6633abf2696fc9526cbcfc05d3be750",
+      "source_tree": "30e04f45d73a1f63834396b16288ab84482fbfb7",
+      "capsule_path": "capsules/n12-duodecuple",
+      "content_hash": "5b7c022bfecd9468652814e02dc3b68e625769726d0e3e24f8c6c118d3926a93",
+      "file_count": 21,
+      "verification_command": "uv run n12-verify",
+      "demo_command": "uv run n12-demo",
+      "runner": "windows-latest",
+      "evidence_class": "historical-aggregate-audit+fresh-rerun"
     }
   ]
 }
