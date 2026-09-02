@@ -56,6 +56,20 @@
       "demo_command": "uv run --locked n8-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger-audit+fresh-rerun"
+    },
+    {
+      "rung": 9,
+      "slug": "n09-nonuple",
+      "source_url": "https://github.com/eight-state/nonuple-cartpole",
+      "source_commit": "63dfefb66e1789fad4b5cd77006164f63584b663",
+      "source_tree": "edcd2408ce8bd584e20aead17b9ed42d82c38db6",
+      "capsule_path": "capsules/n09-nonuple",
+      "content_hash": "93a2c6d45645504a6d22576b6f13e29b4bd380fd54c4dec82c0af363f220ca64",
+      "file_count": 24,
+      "verification_command": "uv run n9-verify",
+      "demo_command": "uv run n9-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger-audit+fresh-rerun"
     }
   ]
 }
