@@ -1,9 +1,0 @@
-* text=auto
-
-# Frozen authorities and evidence retain Git's exact bytes on every platform.
-configs/env-base.yaml -text
-results/** -text
-src/cartpole_race/discrete_tvlqr.py -text
-src/cartpole_race/dynamics.py -text
-src/cartpole_race/env_spec.py -text
-src/cartpole_race/lqr.py -text

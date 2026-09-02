@@ -1,61 +1,75 @@
-# CartPole capsules
+# N-link CartPole swing-up
 
-This repository preserves the ten public CartPole swing-up releases for n=5 through n=14 without changing their evidence. No n=15 release exists yet.
+One shared Python implementation reproduces the CartPole swing-up results for n=5 through n=14. The repository has one package, one lockfile, one rung registry, and one verification command. No n=15 result exists yet.
 
-Each release is imported as a frozen capsule. Its source, lockfile, numerical artifacts, verifier, tests, and historical prose stay together at their original revision. The root tools check those bytes and invoke each capsule's verifier, but they do not replace its verdict.
+The numerical model, integration, LQR, continuous TVLQR, discrete TVLQR, predicates, rendering, and evidence audits are shared. Five small adapters preserve the controller differences that affect results. Every other rung difference is data in `rungs.toml`.
 
-## What the claims mean
-
-- **Success** means the capsule's committed sampled predicate passed. The exact predicate and hold measurement remain capsule-specific.
-- **Proof** means one deterministic run passed a fixed verifier. It does not mean a mathematical proof of stability, robustness, or reachability.
-- **Historical evidence** means committed records are checked for integrity and internal consistency. A verifier does not rerun historical trials unless its own documentation says it does.
-- **Exact** can mean byte-identical replay, exact zero-order-hold discretization, or an exact equilibrium start. Each use must name which meaning applies.
-- **Reproducible** is bounded by the capsule's documented numerical host and dependencies. Trailing floating-point digits are not assumed portable.
-
-The releases do not claim hardware validation, a region of attraction, global robustness, or formal guarantees.
-
-## Preserved releases
-
-| Rung | Source release | Evidence boundary |
-|---|---|---|
-| n=5 | [quintuple](https://github.com/eight-state/quintuple-cartpole) | Historical ledgers and fresh replay |
-| n=6 | [sextuple](https://github.com/eight-state/sextuple-cartpole) | Historical ledgers and fresh replay |
-| n=7 | [septuple](https://github.com/eight-state/septuple-cartpole) | Historical ledgers, logs, and fresh replay |
-| n=8 | [octuple](https://github.com/eight-state/octuple-cartpole) | Historical ledgers and fresh replay |
-| n=9 | [nonuple](https://github.com/eight-state/nonuple-cartpole) | Historical ledgers and fresh replay |
-| n=10 | [decuple](https://github.com/eight-state/decuple-cartpole) | Historical ledgers and fresh replay |
-| n=11 | [undecuple](https://github.com/eight-state/undecuple-cartpole) | Historical ledgers and fresh replay |
-| n=12 | [duodecuple](https://github.com/eight-state/duodecuple-cartpole) | Historical aggregate and fresh replay |
-| n=13 | [tredecuple](https://github.com/eight-state/tredecuple-cartpole) | Source closure and archived verifier run |
-| n=14 | [quattuordecuple](https://github.com/eight-state/quattuordecuple-cartpole) | Artifact hashes and exact replay gate |
-
-n=5 and n=6 use a 60 N release boundary. Later releases use their own committed bounds and saturation rules. n=14 rejects over-limit controls before replay and its retained witness does not use clipping. The consolidated tools never replace these rules with one global force policy.
-
-## Use the registry
+## Run
 
 Requires Python 3.12 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
 uv sync --locked
-uv run cartpole-capsule list
-uv run cartpole-capsule check
-uv run cartpole-capsule verify 5
+uv run cartpole list
+uv run cartpole check
+uv run cartpole verify 5
+uv run cartpole verify all
+uv run cartpole demo 14
 ```
 
-`check` compares every registered capsule with the import manifest. `verify` enters the selected capsule, runs its locked setup, then runs its own verification command. Run a capsule's shipped command directly when reviewing a release claim.
+`check` verifies the original release tags and retained evidence without running a simulation. `verify` adds a fresh shared-code replay. `demo` verifies one rung and writes a GIF under the ignored root `.working/` directory.
 
-Complete source checkouts are the supported distribution. This project does not publish the capsules as wheels, source distributions, or package-index releases because their evidence depends on repository-relative files.
+## Repository layout
 
-## Adding a future capsule
+```text
+src/cartpole_capsules/core/       shared plant and controller math
+src/cartpole_capsules/adapters/   five release-specific strategy families
+rungs.toml                        all per-rung constants and evidence identities
+rungs/n05-* ... n14-*             numerical evidence only
+tests/                            shared and parameterized tests
+```
 
-A future n=15 result starts as a new capsule with its own immutable evidence and verifier. It does not inherit a claim from n=14 or from the clean root tooling. The acceptance requirements are documented in `docs/future-capsules.txt`.
+No rung has its own Python package, dependency lock, workflow, or copy of the dynamics.
 
-## Evidence safety
+## Controller progression
 
-Files inside registered capsule directories are immutable imports. Corrections ship as a new capsule generation rather than edits to historical bytes. This rule preserves n=13 paths under its tracked `.working/` directory and n=14 files covered by its source lock.
+| Rungs | Shared strategy | Main difference |
+|---|---|---|
+| n=5 to n=6 | Continuous TVLQR | 60 N force bound |
+| n=7 to n=11 | Discrete TVLQR | Hold and handoff settings |
+| n=12 | Densified discrete TVLQR | Tick-9700 switch |
+| n=13 | Affine tracker and static hold | Preserved proof payload |
+| n=14 | Controls-only replay | Pre-replay force rejection |
 
-The root `/.working/` directory is disposable and ignored. Nested capsule `.working/` directories are evidence and remain tracked.
+A new rung reuses an existing adapter unless its controller math is genuinely different. The planned n=15 rung therefore starts as configuration and evidence, not another repository.
+
+## Evidence boundaries
+
+The shared verifier keeps three checks separate:
+
+1. Original release identity from the `legacy/nXX-*` Git tags.
+2. Historical evidence hashes and internal consistency.
+3. Fresh numerical replay through the shared implementation.
+
+Historical perturbation records are audited, not rerun. n=13 and n=14 remain host-sensitive numerical results. n=14 CI checks its retained authority on Windows and does not turn that result into a cross-platform guarantee.
+
+The force policy is data, not a global assumption. n=5 and n=6 use a 60 N bound. n=7 through n=14 use 150 N. n=14 rejects over-limit controls before replay instead of clipping them.
+
+## Claim language
+
+- **Success** means the rung's committed sampled predicate passed.
+- **Proof** means one deterministic run passed a fixed verifier. It is not a mathematical proof.
+- **Historical evidence** means frozen records passed hash and consistency checks.
+- **Reproducible** remains bounded by the documented numerical host and dependencies.
+
+These releases do not claim hardware validation, global robustness, a region of attraction, or formal stability guarantees.
+
+## Preserved history
+
+The exact standalone releases remain reachable at `legacy/n05-quintuple` through `legacy/n14-quattuordecuple`. Their full source, tests, lockfiles, documentation, and Git histories stay in this repository even though duplicate project files are absent from `main`.
+
+The old GitHub repositories remain unchanged until this monorepo is public and independently checked. Repository deletion is a separate irreversible action.
 
 ## License
 
-The registry tooling is MIT licensed. Every imported capsule retains its original license and copyright notice.
+MIT. Historical tags retain their original copyright notices.

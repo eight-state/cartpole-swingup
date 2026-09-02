@@ -44,7 +44,7 @@ class LegacyStack:
 
 def _load_active_nominal(cfg: RungConfig) -> tuple[np.ndarray, np.ndarray, float]:
     active = next(n for n in cfg.nominals if n.role == "active")
-    path = base.capsule_root(cfg) / active.path
+    path = base.rung_root(cfg) / active.path
     if base.sha256_file(path) != active.sha256:
         raise ValueError(f"nominal bytes do not match the released authority: {active.path}")
     with np.load(path, allow_pickle=False) as archive:

@@ -181,7 +181,7 @@ def load(cfg: RungConfig, root: Any | None = None) -> ProofStack:
     """Audit authority, cross-check the densified reference, return the stack."""
     from cartpole_capsules.core.fast_pieces import make_densifier
 
-    root = root or base.capsule_root(cfg)
+    root = root or base.rung_root(cfg)
     audit = audit_authority(cfg, root)
     bundle_rel = cfg.extras["bundle_dir"]
     base_rel = cfg.extras["base_nominal"]

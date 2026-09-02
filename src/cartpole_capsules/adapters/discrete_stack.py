@@ -57,7 +57,7 @@ class DiscreteStack:
 
 def _load_dense_nominal(cfg: RungConfig, model: Any) -> tuple[np.ndarray, np.ndarray, float]:
     active = next(n for n in cfg.nominals if n.role == "active")
-    path = base.capsule_root(cfg) / active.path
+    path = base.rung_root(cfg) / active.path
     if base.sha256_file(path) != active.sha256:
         raise ValueError(f"dense nominal bytes do not match the released authority: {active.path}")
     with np.load(path, allow_pickle=False) as archive:
@@ -84,7 +84,7 @@ def _load_dense_nominal(cfg: RungConfig, model: Any) -> tuple[np.ndarray, np.nda
 
 def _load_parent_nominal(cfg: RungConfig) -> tuple[np.ndarray, np.ndarray, float]:
     parent = next(n for n in cfg.nominals if n.role == "parent")
-    path = base.capsule_root(cfg) / parent.path
+    path = base.rung_root(cfg) / parent.path
     if base.sha256_file(path) != parent.sha256:
         raise ValueError(f"parent nominal bytes do not match authority: {parent.path}")
     with np.load(path, allow_pickle=False) as archive:

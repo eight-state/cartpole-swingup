@@ -306,7 +306,7 @@ def check_rung_authority(cfg: RungConfig) -> dict[str, Any]:
     from cartpole_capsules.adapters import proof_n13, witness_n14
     from cartpole_capsules.legacy import audit_legacy_source
 
-    root = base.capsule_root(cfg)
+    root = base.rung_root(cfg)
     nominals = []
     for nominal in cfg.nominals:
         actual = sha256_file(root / nominal.path)

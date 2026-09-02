@@ -3,9 +3,9 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "cartpole-capsules"
+name = "cartpole-swingup"
 version = "0.1.0"
-description = "Registry and verification tooling for immutable CartPole swing-up capsules."
+description = "Shared simulation and verification for n-link CartPole swing-up results."
 readme = "README.md"
 requires-python = ">=3.12, <3.13"
 license = "MIT"
@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [project.scripts]
-cartpole-capsule = "cartpole_capsules.cli:main"
+cartpole = "cartpole_capsules.cli:main"
 
 [dependency-groups]
 dev = [
@@ -41,7 +41,6 @@ addopts = "-q"
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["capsules"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

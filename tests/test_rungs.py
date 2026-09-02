@@ -56,6 +56,6 @@ def test_historical_evidence_audits_without_rerun(
     rung: int, registry: dict[int, base.RungConfig]
 ) -> None:
     config = registry[rung]
-    result = audit_gates(config, base.capsule_root(config))
+    result = audit_gates(config, base.rung_root(config))
     assert (result["total_successes"], result["total_trials"]) == EXPECTED_COUNTS[rung]
     assert all(gate.dialect not in {"todo-aggregate", "todo-composite"} for gate in config.gates)

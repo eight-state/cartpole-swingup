@@ -1,0 +1,14 @@
+N=15 REQUIREMENTS
+
+No n=15 result exists yet.
+
+A new result should add configuration to rungs.toml, numerical evidence under rungs/n15-quindecuple, and one parameterized test case. It should reuse an existing adapter unless the controller math is genuinely different.
+
+Before release, n=15 needs:
+
+1. A stated plant, force policy, integration rate, and success predicate.
+2. Immutable numerical evidence with SHA-256 identities.
+3. Separate authority, historical-audit, and fresh-replay results.
+4. A documented numerical host and matching CI runner.
+5. A passing fresh replay from a clean clone with the root uv.lock.
+6. Plain claim language that excludes hardware, robustness, and mathematical-proof claims unless separate evidence establishes them.

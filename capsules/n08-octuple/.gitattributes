@@ -1,4 +1,0 @@
-* text=auto
-
-# Frozen release evidence must retain Git's exact bytes on every platform.
-results/** -text

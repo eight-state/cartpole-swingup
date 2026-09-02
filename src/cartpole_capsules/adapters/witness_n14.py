@@ -45,7 +45,7 @@ def audit_authority(cfg: RungConfig) -> dict[str, Any]:
     )
 
     repository = base.repository_root()
-    root = base.capsule_root(cfg)
+    root = base.rung_root(cfg)
     legacy = audit_legacy_source(repository, cfg)
     for relative in (
         "artifacts/MANIFEST.json",
@@ -79,13 +79,13 @@ def load(cfg: RungConfig) -> WitnessStack:
     """Audit authority, then load the controls-only witness."""
     audit_authority(cfg)
     active = next(n for n in cfg.nominals if n.role == "active")
-    path = base.capsule_root(cfg) / active.path
+    path = base.rung_root(cfg) / active.path
     if base.sha256_file(path) != active.sha256:
         raise ValueError(f"witness bytes do not match the released authority: {active.path}")
     with np.load(path, allow_pickle=False) as data:
         controls = np.asarray(data["u"], dtype=np.float64).reshape(-1)
         metadata = {key: np.asarray(data[key]).item() for key in data.files if key != "u"}
-    expected_path = base.capsule_root(cfg) / cfg.extras["expected_witness"]
+    expected_path = base.rung_root(cfg) / cfg.extras["expected_witness"]
     return WitnessStack(
         cfg=cfg,
         model=base.build_model(cfg),

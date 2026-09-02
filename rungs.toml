@@ -20,7 +20,7 @@ force_eps = 1e-9
 track_half_length_m = 10.0
 
 # ----------------------------------------------------------------------
-# n05 / n06 — continuous TVLQR + saturated static CARE, 60 N
+# n05 / n06: continuous TVLQR + saturated static CARE, 60 N
 # ----------------------------------------------------------------------
 [rungs.n05]
 slug = "n05-quintuple"
@@ -133,7 +133,7 @@ expected_trials = 24
 expected_successes = 24
 
 # ----------------------------------------------------------------------
-# n07 — discrete TVLQR dense nominal, 150 N, saturated static stage
+# n07: discrete TVLQR dense nominal, 150 N, saturated static stage
 # ----------------------------------------------------------------------
 [rungs.n07]
 slug = "n07-septuple"
@@ -206,7 +206,7 @@ audit_dense_defects = false
 gates = ["finite", "monodromy"]
 
 # ----------------------------------------------------------------------
-# n08 — discrete stack, frozen-evidence audit, saturated static stage
+# n08: discrete stack, frozen-evidence audit, saturated static stage
 # ----------------------------------------------------------------------
 [rungs.n08]
 slug = "n08-octuple"
@@ -273,7 +273,7 @@ static_saturated = true
 defect_limits = { dense_intra_segment = 1e-10, dense_seam = 5e-3, parent_rk4_4ms = 1e-8 }
 
 # ----------------------------------------------------------------------
-# n09 — preroll stack, longest-run hold, per-IC row gates
+# n09: preroll stack, longest-run hold, per-IC row gates
 # ----------------------------------------------------------------------
 [rungs.n09]
 slug = "n09-nonuple"
@@ -334,7 +334,7 @@ defect_limits = { dense_intra_segment = 1e-10, dense_seam = 5e-5, parent_rk4_4ms
 gates = ["finite"]
 
 # ----------------------------------------------------------------------
-# n10 — preroll stack with densification provenance flag
+# n10: preroll stack with densification provenance flag
 # ----------------------------------------------------------------------
 [rungs.n10]
 slug = "n10-decuple"
@@ -397,7 +397,7 @@ defect_limits = { dense_intra_segment = 1e-10, dense_seam = 5e-5, parent_rk4_4ms
 gates = ["finite", "monodromy"]
 
 # ----------------------------------------------------------------------
-# n11 — preroll stack, nominal-first start, hold measured from handoff
+# n11: preroll stack, nominal-first start, hold measured from handoff
 # ----------------------------------------------------------------------
 [rungs.n11]
 slug = "n11-undecuple"
@@ -468,7 +468,7 @@ defect_limits = { dense_intra_segment = 1e-6, dense_seam = 5e-5, parent_rk4_4ms 
 gates = ["finite"]
 
 # ----------------------------------------------------------------------
-# n12 — frozen 4 ms nominal, densified reference, switch at tick 9700
+# n12: frozen 4 ms nominal, densified reference, switch at tick 9700
 # ----------------------------------------------------------------------
 [rungs.n12]
 slug = "n12-duodecuple"
@@ -507,7 +507,7 @@ densify_n_sub = 4
 nominal_meta = { state_shape = [2501, 26], control_shape = [2500] }
 
 # ----------------------------------------------------------------------
-# n13 — B2 source-closure proof chain, switch at tick 5577
+# n13: B2 source-closure proof chain, switch at tick 5577
 # ----------------------------------------------------------------------
 [rungs.n13]
 slug = "n13-tredecuple"
@@ -540,7 +540,7 @@ controller_payload_sha256 = { feedback_k = "5014f3f3e4ad95988314a727dd632a7ba580
 authority_roles = { "runs/r2/nom_n13_4ms_n13_base60r3.npz" = "dense base reference", ".working/n13/n13-live-parent-bridge-20260713T031033509051Z-222644-00/arm-a.npz" = "static SDA K/P", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/00-source-manifest.json" = "source closure lock", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/01-affine-controller.npz" = "affine feedback/feedforward", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/05-b2-classification.json" = "claimed B2 classification", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/05-b2-classification.npz" = "selected switch tick" }
 
 # ----------------------------------------------------------------------
-# n14 — controls-only witness, exact replay gate, no clipping
+# n14: controls-only witness, exact replay gate, no clipping
 # ----------------------------------------------------------------------
 [rungs.n14]
 slug = "n14-quattuordecuple"

@@ -2,7 +2,7 @@
 
 Adapters consume a :class:`RungConfig` loaded from one TOML registry
 (``rungs.toml`` beside this package) and return raw demanded forces. The
-simulator boundary, never the adapter, clips to ``force_bound_n`` — matching
+simulator boundary, never the adapter, clips to ``force_bound_n``: matching
 every historical capsule (linearization stays honest, saturation is measured,
 not hidden).
 
@@ -154,9 +154,9 @@ def repository_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
-def capsule_root(cfg: RungConfig) -> Path:
-    """Root of the frozen capsule directory for this rung."""
-    return repository_root() / "capsules" / cfg.slug
+def rung_root(cfg: RungConfig) -> Path:
+    """Return the data directory for one rung."""
+    return repository_root() / "rungs" / cfg.slug
 
 
 def load_registry(path: Path | None = None) -> dict[int, RungConfig]:

@@ -12,7 +12,7 @@ wheels = [
 ]
 
 [[package]]
-name = "cartpole-capsules"
+name = "cartpole-swingup"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

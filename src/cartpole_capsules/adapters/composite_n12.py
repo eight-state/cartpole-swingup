@@ -49,7 +49,7 @@ class CompositeStack:
 
 def _load_frozen_nominal(cfg: RungConfig) -> tuple[np.ndarray, np.ndarray, float, dict[str, Any]]:
     active = next(n for n in cfg.nominals if n.role == "active")
-    path = base.capsule_root(cfg) / active.path
+    path = base.rung_root(cfg) / active.path
     if base.sha256_file(path) != active.sha256:
         raise ValueError(f"frozen nominal bytes do not match authority: {active.path}")
     with np.load(path, allow_pickle=False) as data:
