@@ -112,6 +112,20 @@
       "demo_command": "uv run n12-demo",
       "runner": "windows-latest",
       "evidence_class": "historical-aggregate-audit+fresh-rerun"
+    },
+    {
+      "rung": 13,
+      "slug": "n13-tredecuple",
+      "source_url": "https://github.com/eight-state/tredecuple-cartpole",
+      "source_commit": "0225b0bd4f471af35befffb2911911efa3b1794e",
+      "source_tree": "694114d7ecbce87b214b8a5865d42449d7d63d05",
+      "capsule_path": "capsules/n13-tredecuple",
+      "content_hash": "de23fc3f06220d4752f0546b366547db7c1cd06632c3e8ac9c6a5fbcdf7d1136",
+      "file_count": 42,
+      "verification_command": "uv run n13-proof-verify",
+      "demo_command": "uv run n13-demo",
+      "runner": "windows-latest",
+      "evidence_class": "source-closure-hash+archived-verifier-run"
     }
   ]
 }
