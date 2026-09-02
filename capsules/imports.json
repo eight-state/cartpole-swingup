@@ -1,4 +1,19 @@
 {
   "schema_version": 1,
-  "capsules": []
+  "capsules": [
+    {
+      "rung": 5,
+      "slug": "n05-quintuple",
+      "source_url": "https://github.com/eight-state/quintuple-cartpole",
+      "source_commit": "d67836cea57410ad50f257b3c4a073022171ca5a",
+      "source_tree": "3f16d830b61e9d2543389542df6bd47f85bb9857",
+      "capsule_path": "capsules/n05-quintuple",
+      "content_hash": "4a5fdb8acb3bcd12915ce8adf7a6febb558f6cf14fabfb60de47e04c8ee7b933",
+      "file_count": 23,
+      "verification_command": "uv run --locked n5-verify",
+      "demo_command": "uv run --locked n5-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger-audit+fresh-rerun"
+    }
+  ]
 }
