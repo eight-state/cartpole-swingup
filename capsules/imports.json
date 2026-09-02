@@ -126,6 +126,20 @@
       "demo_command": "uv run n13-demo",
       "runner": "windows-latest",
       "evidence_class": "source-closure-hash+archived-verifier-run"
+    },
+    {
+      "rung": 14,
+      "slug": "n14-quattuordecuple",
+      "source_url": "https://github.com/eight-state/quattuordecuple-cartpole",
+      "source_commit": "91fbfb441459b8a318f1207d3a3797c260126559",
+      "source_tree": "82ba06adb3a519c18108c657eaf40a81b70c69dc",
+      "capsule_path": "capsules/n14-quattuordecuple",
+      "content_hash": "db7fbc8aa491669b3fd4f02f3a6ece41fcfda02d54660f44889a11e0921a15fe",
+      "file_count": 28,
+      "verification_command": "uv run n14-verify",
+      "demo_command": null,
+      "runner": "windows-latest",
+      "evidence_class": "artifact-hash+exact-replay-gate"
     }
   ]
 }

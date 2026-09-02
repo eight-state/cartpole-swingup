@@ -1,0 +1,9 @@
+{
+  "release": "N14",
+  "schema_version": 1,
+  "sha256": {
+    "artifacts/expected-witness.json": "493ff90986a09453761490fc0cbc5761f602d2b0b9e42e02b7f0078508046b41",
+    "artifacts/n14-witness.npz": "f10fc56e854050e6091f0ac7ce406772875ab70f38829d2a177d134e97ed0b29",
+    "artifacts/provenance.json": "cdf8a86cd76fcc8bc7244c1234ee3f1d4a09d4657aed0bfcc04c0eae5bd655cc"
+  }
+}
