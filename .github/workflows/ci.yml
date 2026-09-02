@@ -13,8 +13,8 @@ jobs:
   root:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.0.1
         with:
           python-version: "3.12.10"
       - run: uv sync --locked
@@ -80,8 +80,8 @@ jobs:
             demo: uv run n11-demo
             verify: uv run n11-verify
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.0.1
         with:
           python-version: "3.12.10"
       - name: Sync
@@ -120,8 +120,8 @@ jobs:
             demo: uv run n13-demo
             verify: uv run n13-proof-verify
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.0.1
         with:
           python-version: "3.12.10"
       - name: Sync
@@ -147,8 +147,8 @@ jobs:
       run:
         working-directory: capsules/n14-quattuordecuple
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.0.1
         with:
           python-version: "3.12.10"
       - run: uv sync --locked
