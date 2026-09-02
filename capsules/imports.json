@@ -14,6 +14,20 @@
       "demo_command": "uv run --locked n5-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger-audit+fresh-rerun"
+    },
+    {
+      "rung": 6,
+      "slug": "n06-sextuple",
+      "source_url": "https://github.com/eight-state/sextuple-cartpole",
+      "source_commit": "e2d51081c130ac58a9fbc91546a53ff0222bf111",
+      "source_tree": "fdc366b43ac9c15c8ea3f15c0887a3930bb3e467",
+      "capsule_path": "capsules/n06-sextuple",
+      "content_hash": "cbd0f9355eb9e7b521b703bbeae032a076e9291628b5d39872d36dd8a1bcac56",
+      "file_count": 22,
+      "verification_command": "uv run n6-verify",
+      "demo_command": "uv run n6-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger-audit+fresh-rerun"
     }
   ]
 }
