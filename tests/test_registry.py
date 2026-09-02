@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-from conftest import create_capsule
+from conftest import create_capsule, stage
 
 from cartpole_capsules.manifest import ManifestError, load_manifest
 from cartpole_capsules.registry import check_registry, register_capsule
@@ -24,7 +24,7 @@ def test_content_drift_fails(registry_root: Path) -> None:
     (registry_root / "capsules" / "n05-quintuple" / "artifact.txt").write_text(
         "changed\n", encoding="utf-8"
     )
-    with pytest.raises(ManifestError, match="content hash changed"):
+    with pytest.raises(ManifestError, match="tracked capsule file changed"):
         check_registry(registry_root)
 
 
@@ -44,6 +44,7 @@ def test_registration_records_observed_bytes(registry_root: Path) -> None:
     directory = registry_root / "capsules" / "n05-quintuple"
     directory.mkdir()
     (directory / "artifact.txt").write_text("frozen\n", encoding="utf-8")
+    stage(registry_root, "capsules/n05-quintuple")
 
     entry = register_capsule(
         registry_root,

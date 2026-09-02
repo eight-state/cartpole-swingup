@@ -154,7 +154,8 @@ def write_manifest(root: Path, entries: list[CapsuleEntry]) -> None:
         "capsules": [entry.to_mapping() for entry in entries],
     }
     temporary = path.with_suffix(".json.tmp")
-    temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    with temporary.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(payload, indent=2) + "\n")
     temporary.replace(path)
 
 

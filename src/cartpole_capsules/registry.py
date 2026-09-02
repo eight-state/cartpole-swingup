@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from cartpole_capsules.hashing import TreeDigest, hash_tree
+from cartpole_capsules.hashing import TreeDigest, TreeHashError, hash_tree
 from cartpole_capsules.manifest import (
     CapsuleEntry,
     ManifestError,
@@ -51,7 +51,10 @@ def check_registry(root: Path) -> list[CapsuleCheck]:
 
     checks: list[CapsuleCheck] = []
     for entry in entries:
-        digest = hash_tree(capsule_directory(root, entry))
+        try:
+            digest = hash_tree(capsule_directory(root, entry))
+        except TreeHashError as exc:
+            raise ManifestError(str(exc)) from exc
         if digest.sha256 != entry.content_hash:
             raise ManifestError(
                 f"capsule {entry.slug} content hash changed: "
@@ -87,7 +90,10 @@ def register_capsule(
 
     capsule_path = f"capsules/{slug}"
     directory = root / capsule_path
-    digest = hash_tree(directory)
+    try:
+        digest = hash_tree(directory)
+    except TreeHashError as exc:
+        raise ManifestError(str(exc)) from exc
     entry = CapsuleEntry.from_mapping(
         {
             "rung": rung,

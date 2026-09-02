@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -10,16 +11,27 @@ from cartpole_capsules.manifest import CapsuleEntry, write_manifest
 
 @pytest.fixture
 def registry_root(tmp_path: Path) -> Path:
+    subprocess.run(("git", "init", "-q", str(tmp_path)), check=True)
+    subprocess.run(("git", "-C", str(tmp_path), "config", "user.name", "Tests"), check=True)
+    subprocess.run(
+        ("git", "-C", str(tmp_path), "config", "user.email", "tests@example.invalid"),
+        check=True,
+    )
     (tmp_path / "capsules").mkdir()
     (tmp_path / "pyproject.toml").write_text("[project]\nname='test'\n", encoding="utf-8")
     write_manifest(tmp_path, [])
     return tmp_path
 
 
+def stage(root: Path, *paths: str) -> None:
+    subprocess.run(("git", "-C", str(root), "add", "--", *paths), check=True)
+
+
 def create_capsule(root: Path, *, rung: int = 5, slug: str = "n05-quintuple") -> CapsuleEntry:
     directory = root / "capsules" / slug
     directory.mkdir()
     (directory / "artifact.txt").write_text("frozen\n", encoding="utf-8")
+    stage(root, f"capsules/{slug}")
     digest = hash_tree(directory)
     entry = CapsuleEntry.from_mapping(
         {

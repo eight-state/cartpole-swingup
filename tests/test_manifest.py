@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from cartpole_capsules.manifest import CapsuleEntry, ManifestError, load_manifest
+from cartpole_capsules.manifest import CapsuleEntry, ManifestError, load_manifest, write_manifest
 
 
 def valid_entry() -> dict[str, object]:
@@ -61,6 +61,13 @@ def test_unknown_fields_are_rejected() -> None:
     mapping["extra"] = "not allowed"
     with pytest.raises(ManifestError, match="unknown"):
         CapsuleEntry.from_mapping(mapping)
+
+
+def test_manifest_writer_uses_lf_on_every_platform(registry_root: Path) -> None:
+    write_manifest(registry_root, [])
+    raw = (registry_root / "capsules" / "imports.json").read_bytes()
+    assert raw.endswith(b"\n")
+    assert b"\r\n" not in raw
 
 
 def test_duplicate_rungs_are_rejected(registry_root: Path) -> None:
