@@ -70,6 +70,20 @@
       "demo_command": "uv run n9-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger-audit+fresh-rerun"
+    },
+    {
+      "rung": 10,
+      "slug": "n10-decuple",
+      "source_url": "https://github.com/eight-state/decuple-cartpole",
+      "source_commit": "5c0b36c03f58e85b17c19f8004ea9a1bff27dfd3",
+      "source_tree": "948c0f19daefb01a6793d6a1742eec6b5d36d77c",
+      "capsule_path": "capsules/n10-decuple",
+      "content_hash": "a3c3c5a2976fba0be6b09b894c22700e84cebc181b2068b0d1c81b5c830b1480",
+      "file_count": 31,
+      "verification_command": "uv run n10-verify",
+      "demo_command": "uv run n10-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger-audit+fresh-rerun"
     }
   ]
 }
