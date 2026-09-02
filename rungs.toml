@@ -1,0 +1,573 @@
+# Lean-generation rung registry: one table per rung, merged over [defaults].
+# Every constant, artifact path, and SHA-256 is transcribed from the frozen
+# capsules (capsules/n05..n14) and their committed evidence. The lean spine
+# reads this file instead of carrying per-rung constants in code.
+
+[defaults]
+cart_mass_kg = 1.0
+link_mass_kg = 0.10
+link_length_m = 0.50
+gravity_m_s2 = 9.81
+control_rate_hz = 1000.0
+rk4_max_step_s = 0.00025
+theta_tol_deg = 5.0
+theta_rate_tol_rad_s = 0.5
+cart_tol_m = 2.0
+cart_rate_tol_m_s = 0.5
+hold_required_s = 5.0
+start_state = "hanging"
+force_eps = 1e-9
+track_half_length_m = 10.0
+
+# ----------------------------------------------------------------------
+# n05 / n06: continuous TVLQR + saturated static CARE, 60 N
+# ----------------------------------------------------------------------
+[rungs.n05]
+slug = "n05-quintuple"
+legacy_tag = "legacy/n05-quintuple"
+source_commit = "d67836cea57410ad50f257b3c4a073022171ca5a"
+source_tree = "3f16d830b61e9d2543389542df6bd47f85bb9857"
+adapter = "legacy_tvlqr"
+evidence_class = "historical-ledger-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 5
+force_bound_n = 60.0
+force_eps = 1e-9
+hold_metric = "suffix"
+post_horizon_s = 5.0
+total_ticks = 11000
+
+[[rungs.n05.nominals]]
+role = "active"
+path = "results/nom_n5_gluck_cont.npz"
+sha256 = "6a029c6892a5dcee8851537aabdb20fd4cc21dbabeed4a6d5a843f3f0ec189c1"
+n_nodes = 6000
+horizon_s = 6.0
+strict_meta = true
+alias_dialect = true
+
+[[rungs.n05.gates]]
+file = "results/clvalidate_n5_F60_banked_seed12345.json"
+sha256 = "ae1e06ee709331b4df33239b222608d72d1902a045f7209e4971825d59670513"
+seed = 12345
+dialect = "aggregate"
+force_bound_n = 60.0
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n05.gates]]
+file = "results/clvalidate_n5_F60_banked_seed999.json"
+sha256 = "a2b9883a72f92b3845003f92f773d6a7f927d762fd26c08953543e22dda45fb7"
+seed = 999
+dialect = "aggregate"
+force_bound_n = 60.0
+expected_trials = 40
+expected_successes = 40
+
+[[rungs.n05.gates]]
+file = "results/clvalidate_n5_F60_fresh_seed7777.json"
+sha256 = "60e20c89208dd83abc9be83361233e710e87cd5b7283789532982cc0067d0169"
+seed = 7777
+dialect = "aggregate"
+force_bound_n = 60.0
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n05.gates]]
+file = "results/clvalidate_n5_F60_stress_seed2024.json"
+sha256 = "8697e3cd5398c3d68023a2b4a35cb0ea41c3b4eb379f0eb9170ea2e95314440a"
+seed = 2024
+dialect = "aggregate"
+force_bound_n = 60.0
+expected_trials = 24
+expected_successes = 24
+
+[rungs.n05.extras]
+expected_peak_force_n = 20.175585913426993
+
+[rungs.n05.extras.expected_metrics]
+closed_loop_monodromy_rho = { value = 0.029767942980498303, atol = 1e-8 }
+final_hold_s = { value = 6.381, atol = 0.001 }
+applied_peak_abs_n = { value = 20.175585913426993, atol = 1e-5 }
+
+[rungs.n06]
+slug = "n06-sextuple"
+legacy_tag = "legacy/n06-sextuple"
+source_commit = "e2d51081c130ac58a9fbc91546a53ff0222bf111"
+source_tree = "fdc366b43ac9c15c8ea3f15c0887a3930bb3e467"
+adapter = "legacy_tvlqr"
+evidence_class = "historical-ledger-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 6
+force_bound_n = 60.0
+force_eps = 1e-12
+hold_metric = "suffix"
+post_horizon_s = 6.0
+total_ticks = 13000
+
+[[rungs.n06.nominals]]
+role = "active"
+path = "results/nom_n6_gluck_cont.npz"
+sha256 = "b4309874c531ef38f7a8aa612bf0e45ad8494acc73e81df00e02a53860b8d047"
+n_nodes = 7000
+horizon_s = 7.0
+strict_meta = true
+alias_dialect = true
+
+[[rungs.n06.gates]]
+file = "results/clvalidate_n6_F60_banked_seed12345.json"
+sha256 = "93800c5ee5237483abd11779e5c94cb0433d92a607137e5f44ce938ecc8a4e26"
+seed = 12345
+dialect = "aggregate"
+force_bound_n = 60.0
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n06.gates]]
+file = "results/clvalidate_n6_F60_banked_seed999.json"
+sha256 = "c974dec49e0b040c988b59ac6ecbd095d2604f4b313d0b045dbb436d92c61348"
+seed = 999
+dialect = "aggregate"
+force_bound_n = 60.0
+expected_trials = 24
+expected_successes = 24
+
+# ----------------------------------------------------------------------
+# n07: discrete TVLQR dense nominal, 150 N, saturated static stage
+# ----------------------------------------------------------------------
+[rungs.n07]
+slug = "n07-septuple"
+legacy_tag = "legacy/n07-septuple"
+source_commit = "56c15ca1cde6454a1b5308657757402cc08e69c5"
+source_tree = "dc7a3354072f8b419214d3b2bdd899c3eca2a092"
+adapter = "discrete_stack"
+evidence_class = "historical-ledger+log-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 7
+force_bound_n = 150.0
+hold_metric = "suffix"
+post_horizon_s = 6.0
+total_ticks = 14000
+
+[[rungs.n07.nominals]]
+role = "active"
+path = "results/nom_n7_dense1ms.npz"
+sha256 = "fe192b9eefb19540af782ef8163d1ce2b54ef76faf94cfa9e789c95c367c5b13"
+n_nodes = 8000
+horizon_s = 8.0
+
+[[rungs.n07.gates]]
+file = "results/clvalidate_n7_composite_seed12345.json"
+sha256 = "db119bb4cf16d07dda2b32467466da469b779cf63729bd586cdada713583105e"
+seed = 12345
+dialect = "composite"
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n07.gates]]
+file = "results/clvalidate_n7_composite_seed777.json"
+sha256 = "87bd6224b395f18288f96207cb728ccf199f58e3243c807b75666b648ae9b07f"
+seed = 777
+dialect = "composite"
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n07.gates]]
+file = "results/clvalidate_n7_fixed_seed12345.json"
+sha256 = "856564c7ed85f221fd6a7fdb12760d6bb0a8b19900c905d3845d0a81bb6ff999"
+seed = 12345
+dialect = "composite"
+expected_trials = 24
+expected_successes = 18
+
+[[rungs.n07.gates]]
+file = "results/gate_clean_seed12345.log"
+sha256 = "e98ad02b4d7574fc712f2cc5e92d0725abf1540452dcfb10acc913623c80630f"
+dialect = "hash"
+
+[[rungs.n07.gates]]
+file = "results/gate_clean_seed777.log"
+sha256 = "69d32206416870e6fb32db03729ee98c4ff61f77e66107a6ff7a350675720815"
+dialect = "hash"
+
+[[rungs.n07.gates]]
+file = "results/gate_iterbudget_seed12345.log"
+sha256 = "5ca3be2bbfd005496242e2a3b50dc7eca84d31b4980bd6276e62d66c45d0acb4"
+dialect = "hash"
+
+[[rungs.n07.gates]]
+file = "results/gate_iterbudget_seed777.log"
+sha256 = "2a6a210f2fa5f97a5a8a9bf619f1af5c4755d89b231d4a3e605fc0e2c16a8568"
+dialect = "hash"
+
+[rungs.n07.extras]
+static_saturated = true
+audit_dense_defects = false
+gates = ["finite", "monodromy"]
+
+# ----------------------------------------------------------------------
+# n08: discrete stack, frozen-evidence audit, saturated static stage
+# ----------------------------------------------------------------------
+[rungs.n08]
+slug = "n08-octuple"
+legacy_tag = "legacy/n08-octuple"
+source_commit = "6e7576f8288e8e1512592cfba87138d4a6d62f31"
+source_tree = "f356d1f342cd3cabbedf30284fd6fb98200e3575"
+adapter = "discrete_stack"
+evidence_class = "historical-ledger-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 8
+force_bound_n = 150.0
+hold_metric = "suffix"
+post_horizon_s = 6.0
+total_ticks = 15000
+
+[[rungs.n08.nominals]]
+role = "active"
+path = "results/nom_n8_dense1ms.npz"
+sha256 = "dd3e64c87485649feb59d0cf2ded147732d70e955ce131911e41b96c22b20892"
+n_nodes = 9000
+horizon_s = 9.0
+
+[[rungs.n08.nominals]]
+role = "parent"
+path = "results/nom_n8_4ms.npz"
+sha256 = "cf0c6a23b4f344f0fe8da0714594bb4b0d05b72d07b0e936d8d1326cfbc4c61c"
+n_nodes = 2250
+horizon_s = 9.0
+
+[[rungs.n08.gates]]
+file = "results/clvalidate_n8_composite_seed12345.json"
+sha256 = "3f8db3d7eac50af0da774c08b2c4f2deb4edca2c3e5aa15d399504bd0548ad35"
+seed = 12345
+dialect = "composite"
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n08.gates]]
+file = "results/clvalidate_n8_composite_seed777.json"
+sha256 = "34dc24d37b1394bab43f0490bdec230917f271c02d98e5415c72445e6678c987"
+seed = 777
+dialect = "composite"
+expected_trials = 24
+expected_successes = 24
+
+[[rungs.n08.gates]]
+file = "results/clvalidate_n8_fixed_seed12345.json"
+sha256 = "3d77d53d964f5cefb12f41ee765dfa6b2b1b75e03e9786c5b8f83a3c369dad4e"
+seed = 12345
+dialect = "composite"
+expected_trials = 24
+expected_successes = 8
+
+[[rungs.n08.gates]]
+file = "results/clvalidate_n8_fixed_seed777.json"
+sha256 = "1771ed02ddc430e44a94eb1b2b848b27aab1fdd12e39b8e87aefd71f715f8ab7"
+seed = 777
+dialect = "composite"
+expected_trials = 24
+expected_successes = 16
+
+[rungs.n08.extras]
+static_saturated = true
+defect_limits = { dense_intra_segment = 1e-10, dense_seam = 5e-3, parent_rk4_4ms = 1e-8 }
+
+# ----------------------------------------------------------------------
+# n09: preroll stack, longest-run hold, per-IC row gates
+# ----------------------------------------------------------------------
+[rungs.n09]
+slug = "n09-nonuple"
+legacy_tag = "legacy/n09-nonuple"
+source_commit = "63dfefb66e1789fad4b5cd77006164f63584b663"
+source_tree = "edcd2408ce8bd584e20aead17b9ed42d82c38db6"
+adapter = "discrete_stack"
+evidence_class = "historical-ledger-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 9
+force_bound_n = 150.0
+hold_metric = "longest_run"
+post_horizon_s = 11.0
+total_ticks = 21000
+
+[[rungs.n09.nominals]]
+role = "active"
+path = "results/nom_n9_dense1ms_wv6en4.npz"
+sha256 = "35e55aa95446e9db1ed44a92b91d40cbb9a731b959295177fb3b5ef463693f59"
+n_nodes = 10000
+horizon_s = 10.0
+strict_meta = true
+
+[[rungs.n09.nominals]]
+role = "parent"
+path = "results/nom_n9_4ms_wv6en4.npz"
+sha256 = "767ce9aa2698f8ff1be4aa17fb39363f1c98a50043d8bdd72f04b6f7068f8c00"
+n_nodes = 2500
+horizon_s = 10.0
+strict_meta = true
+
+[[rungs.n09.gates]]
+file = "results/gate_n9_preroll_seed12345.json"
+sha256 = "de9f48239bba3e37288de07f737af9cf6137a8ae6481d1016de0203b3e800600"
+seed = 12345
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+handoff_limit_deg = 20.0
+
+[[rungs.n09.gates]]
+file = "results/gate_n9_preroll_seed777.json"
+sha256 = "a0af8ad0c34610edcfced6f3b7b5d693e46e6e0627fcbf68b9fc78462226fb66"
+seed = 777
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+handoff_limit_deg = 20.0
+
+[[rungs.n09.gates]]
+file = "results/gate_n9_preroll_seed2024.json"
+sha256 = "7b14f8b95cfcc32c48cad58a40105fc519c0f174b0d4c4afd5a4cc71ecf25996"
+seed = 2024
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+handoff_limit_deg = 20.0
+
+[rungs.n09.extras]
+defect_limits = { dense_intra_segment = 1e-10, dense_seam = 5e-5, parent_rk4_4ms = 5e-7 }
+gates = ["finite"]
+
+# ----------------------------------------------------------------------
+# n10: preroll stack with densification provenance flag
+# ----------------------------------------------------------------------
+[rungs.n10]
+slug = "n10-decuple"
+legacy_tag = "legacy/n10-decuple"
+source_commit = "5c0b36c03f58e85b17c19f8004ea9a1bff27dfd3"
+source_tree = "948c0f19daefb01a6793d6a1742eec6b5d36d77c"
+adapter = "discrete_stack"
+evidence_class = "historical-ledger-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 10
+force_bound_n = 150.0
+hold_metric = "longest_run"
+post_horizon_s = 11.0
+total_ticks = 21000
+
+[[rungs.n10.nominals]]
+role = "active"
+path = "results/nom_n10_dense1ms_wv1en3t.npz"
+sha256 = "df40be618e0f39a0c38243a23d239978518e33976a7814bd7b6a68f50dfe59e6"
+n_nodes = 10000
+horizon_s = 10.0
+strict_meta = true
+
+[[rungs.n10.nominals]]
+role = "parent"
+path = "results/nom_n10_4ms_wv1en3t.npz"
+sha256 = "3889f22a8d66935181e648477c24f3d6689f5359d9f0f0cbc07e899a539e77ae"
+n_nodes = 2500
+horizon_s = 10.0
+
+[[rungs.n10.gates]]
+file = "results/gate_n10_preroll_seed12345.json"
+sha256 = "ccb791e3201124547b0bb55e8ca5f75afabbc1fc8dcfde775a93bba1497d7922"
+seed = 12345
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+nominal = "nom_n10_dense1ms_wv1en3t.npz"
+handoff_limit_deg = 20.0
+
+[[rungs.n10.gates]]
+file = "results/gate_n10_preroll_seed777.json"
+sha256 = "a33c4015e7905d566622c54244ad42fbbfe9370bd05e5c1d35630c79bb615f2e"
+seed = 777
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+nominal = "nom_n10_dense1ms_wv1en3t.npz"
+handoff_limit_deg = 20.0
+
+[[rungs.n10.gates]]
+file = "results/gate_n10_preroll_seed2024.json"
+sha256 = "5a8608d47eba81a19de909f97a81c16e947f394882322f1ac81e0ad35e84a917"
+seed = 2024
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+nominal = "nom_n10_dense1ms_wv1en3t.npz"
+handoff_limit_deg = 20.0
+
+[rungs.n10.extras]
+defect_limits = { dense_intra_segment = 1e-10, dense_seam = 5e-5, parent_rk4_4ms = 5e-7 }
+gates = ["finite", "monodromy"]
+
+# ----------------------------------------------------------------------
+# n11: preroll stack, nominal-first start, hold measured from handoff
+# ----------------------------------------------------------------------
+[rungs.n11]
+slug = "n11-undecuple"
+legacy_tag = "legacy/n11-undecuple"
+source_commit = "fea0c4e1d5ed1f75e4002a18f4d0b09f59a613d7"
+source_tree = "03e0b7d74ec04e0ef56ac06586761d708a464602"
+adapter = "discrete_stack"
+evidence_class = "historical-ledger-audit+fresh-rerun"
+runner = "ubuntu-latest"
+n_links = 11
+force_bound_n = 150.0
+hold_metric = "longest_run"
+hold_scope = "from_switch"
+post_horizon_s = 12.0
+total_ticks = 22000
+start_state = "nominal_first"
+
+[[rungs.n11.nominals]]
+role = "active"
+path = "runs/r2/nom_n11_dense1ms_capture025_smoke3t03.npz"
+sha256 = "1b7458cefe5d91aeaa012e78c4edbf586cd0d989df8e8e6f7adb2000cbae290d"
+n_nodes = 10000
+horizon_s = 10.0
+strict_meta = true
+
+[[rungs.n11.nominals]]
+role = "parent"
+path = "runs/r2/nom_n11_4ms_capture025_smoke3t03.npz"
+sha256 = "b190e1ff71fe5242c850e5eb817bf8401fc38f24f9e189e6b132e85471dcea86"
+n_nodes = 2500
+horizon_s = 10.0
+
+[[rungs.n11.gates]]
+file = "runs/r2/gate_n11_preroll_seed12345.json"
+sha256 = "1e73bb12234ade44c455f75eb001f41d02402ca5eec1041275642cdac617ea6f"
+seed = 12345
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+nominal = "runs/r2/nom_n11_dense1ms_capture025_smoke3t03.npz"
+nominal_match = "exact"
+handoff_limit_deg = 20.0
+check_t_pre = true
+
+[[rungs.n11.gates]]
+file = "runs/r2/gate_n11_preroll_seed777.json"
+sha256 = "8164df430f2eda7a88995e928847e5e2da7f1c4973392f10741833853ec10edc"
+seed = 777
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+nominal = "runs/r2/nom_n11_dense1ms_capture025_smoke3t03.npz"
+nominal_match = "exact"
+handoff_limit_deg = 20.0
+check_t_pre = true
+
+[[rungs.n11.gates]]
+file = "runs/r2/gate_n11_preroll_seed2024.json"
+sha256 = "bb62a57ee05cff69b3285f3faedfb189b484f293d6bea89730d65108152a5d25"
+seed = 2024
+dialect = "rows"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+nominal = "runs/r2/nom_n11_dense1ms_capture025_smoke3t03.npz"
+nominal_match = "exact"
+handoff_limit_deg = 20.0
+check_t_pre = true
+
+[rungs.n11.extras]
+defect_limits = { dense_intra_segment = 1e-6, dense_seam = 5e-5, parent_rk4_4ms = 2e-5 }
+gates = ["finite"]
+
+# ----------------------------------------------------------------------
+# n12: frozen 4 ms nominal, densified reference, switch at tick 9700
+# ----------------------------------------------------------------------
+[rungs.n12]
+slug = "n12-duodecuple"
+legacy_tag = "legacy/n12-duodecuple"
+source_commit = "d7616824b6633abf2696fc9526cbcfc05d3be750"
+source_tree = "30e04f45d73a1f63834396b16288ab84482fbfb7"
+adapter = "composite_n12"
+evidence_class = "historical-aggregate-audit+fresh-rerun"
+runner = "windows-latest"
+host_sensitive = true
+n_links = 12
+force_bound_n = 150.0
+hold_metric = "suffix"
+hold_scope = "from_switch"
+switch_tick = 9700
+total_ticks = 21700
+
+[[rungs.n12.nominals]]
+role = "active"
+path = "artifacts/nom_n12_4ms_fast.npz"
+sha256 = "bc49f597bc8235f391ff1deeb727a43c1264d10ced3ff5e961e09a1d92b6c2c0"
+n_nodes = 2500
+horizon_s = 10.0
+
+[[rungs.n12.gates]]
+file = "artifacts/n12-evidence.json"
+sha256 = "778d1d24621ef97d0350ec3b9dd6165a8ffb893f175b8087e6689f75c85ec86c"
+seed = 0
+dialect = "n12-evidence"
+controller = "preroll_down_lqr+tvlqr_track+static_hold"
+force_bound_n = 150.0
+
+[rungs.n12.extras]
+densify_stride = 4
+densify_n_sub = 4
+nominal_meta = { state_shape = [2501, 26], control_shape = [2500] }
+
+# ----------------------------------------------------------------------
+# n13: B2 source-closure proof chain, switch at tick 5577
+# ----------------------------------------------------------------------
+[rungs.n13]
+slug = "n13-tredecuple"
+legacy_tag = "legacy/n13-tredecuple"
+source_commit = "0225b0bd4f471af35befffb2911911efa3b1794e"
+source_tree = "694114d7ecbce87b214b8a5865d42449d7d63d05"
+adapter = "proof_n13"
+evidence_class = "source-closure-hash+archived-verifier-run"
+runner = "windows-latest"
+host_sensitive = true
+n_links = 13
+force_bound_n = 150.0
+hold_metric = "suffix"
+hold_scope = "from_switch"
+switch_tick = 5577
+total_ticks = 17577
+
+[rungs.n13.extras]
+bundle_dir = ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00"
+base_nominal = "runs/r2/nom_n13_4ms_n13_base60r3.npz"
+arm_a = ".working/n13/n13-live-parent-bridge-20260713T031033509051Z-222644-00/arm-a.npz"
+base_nodes = 2500
+tracker_ticks = 10000
+hold_ticks = 12000
+classification = "N13_ONE_RUN_PASS"
+densify_stride = 4
+source_sha256 = { "src/cartpole_race/__init__.py" = "92f02f32168d383b97f3bc2d853456427b14219a239609de480d5c400cc6b5a3", "src/cartpole_race/dynamics.py" = "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46", "src/cartpole_race/env_spec.py" = "bb0a6b1c41403ee712b6ab0888c9b03486e327f0adba2a554bf072a989ce318d", "src/cartpole_race/funnels.py" = "187b9f0dbcd12a5a1cb268e00ba368fbab8dac0241431e4040f9ebf8e6a0bf7c", "src/cartpole_race/lqr.py" = "76444997b66d7074ac4709407e04152e8631f2063555f358a716426c201813fd", "src/cartpole_race/tvlqr.py" = "dd9574e4175439ba38b349617d8db1205745f1a2384312594bf4c7f04e1aec84", ".working/n13/n13_b2_affine_defect_tracker.py" = "1168aafa6ff6650ccd282f59b3a6705110b01c30f2bb67e0bbba8c765ac1dc1b", "scripts/fast_pieces.py" = "e49c94f4d763a89911fa6e55fd9a460f14748246c0096d49694429501e1e20a9", "scripts/ilqg.py" = "94d3eca2cc2aa4d339fa19bd18421fefd6145fc6c99df161e05b6fe7d505253c", "scripts/robust_gains.py" = "a1b941344136def52c97ae970fcf3cc86993d6d335c1f1a85c6104bb00e240fc" }
+fixed_file_sha256 = { ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/00-source-manifest.json" = "7fa49e01813d9e54488d50e3d1f4d4adfd2cc62ec8d3b8d556c9b88c2b25cdee", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/01-affine-controller.npz" = "7d57677e6858113d908334e19b37b6286341129e5f8f8f9e93bb36653fbdefb8" }
+controller_payload_sha256 = { feedback_k = "5014f3f3e4ad95988314a727dd632a7ba580a613dfc8815635ebd17039dd3921", feedforward = "59e31b6612b3fadf3f3a8d3f70704a4d2adbf89ea2056d6ad5b76b7b012e7d83" }
+authority_roles = { "runs/r2/nom_n13_4ms_n13_base60r3.npz" = "dense base reference", ".working/n13/n13-live-parent-bridge-20260713T031033509051Z-222644-00/arm-a.npz" = "static SDA K/P", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/00-source-manifest.json" = "source closure lock", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/01-affine-controller.npz" = "affine feedback/feedforward", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/05-b2-classification.json" = "claimed B2 classification", ".working/n13/n13-b2-affine-defect-tracker-20260713T053956542276Z-278512-00/05-b2-classification.npz" = "selected switch tick" }
+
+# ----------------------------------------------------------------------
+# n14: controls-only witness, exact replay gate, no clipping
+# ----------------------------------------------------------------------
+[rungs.n14]
+slug = "n14-quattuordecuple"
+legacy_tag = "legacy/n14-quattuordecuple"
+source_commit = "91fbfb441459b8a318f1207d3a3797c260126559"
+source_tree = "82ba06adb3a519c18108c657eaf40a81b70c69dc"
+adapter = "witness_n14"
+evidence_class = "artifact-hash+exact-replay-gate"
+runner = "windows-latest"
+host_sensitive = true
+n_links = 14
+force_bound_n = 150.0
+hold_metric = "longest_run"
+reject_nonfinite = true
+switch_tick = 6009
+total_ticks = 22009
+
+[[rungs.n14.nominals]]
+role = "active"
+path = "artifacts/n14-witness.npz"
+sha256 = "f10fc56e854050e6091f0ac7ce406772875ab70f38829d2a177d134e97ed0b29"
+n_nodes = 22009
+horizon_s = 22.009
+
+[rungs.n14.extras]
+reject_over_limit_before_replay = true
+required_success_states = 5001
+expected_witness = "artifacts/expected-witness.json"
+expected_metadata = { control_dt_s = 0.001, force_bound_n = 150.0, n = 14, rk4_substep_s = 0.00025, switch_tick = 6009, track_bound_m = 10.0, sole_parent_sha256 = "fffb9466ee0be82646867ed6c8f13748827a2d157144eb0c81cfe642fc0a005b", source_fullmass_sha256 = "4d1c722e527a62c6989b69d9550e6e22b98211619515c3e476086bfc48a06799" }
+source_sha256 = { "src/cartpole_race/__init__.py" = "338d2ee651a473ae73e2a876a23783a92c1f128976d2047567392a1a65641cd9", "src/cartpole_race/dynamics.py" = "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46", "src/cartpole_race/env_spec.py" = "bb0a6b1c41403ee712b6ab0888c9b03486e327f0adba2a554bf072a989ce318d", "src/n14_cartpole/success.py" = "d976f237ae93d829bb52d1cf7c1d94335fc362130696ff7445042104fb032aca" }

@@ -1,13 +1,11 @@
-PROVENANCE POLICY
+PROVENANCE
 
-Each manifest entry records the public source repository, source commit, source tree, imported path, Git-canonical content digest, and tracked file count.
+The original standalone releases are preserved by immutable Git tags named legacy/n05-quintuple through legacy/n14-quattuordecuple. Each rung entry records the expected tag, source commit, and source tree.
 
-An imported capsule is immutable. Its source, lockfile, tests, workflows, documentation, numerical artifacts, and tracked scratch paths stay byte-for-byte together. A correction creates a new capsule generation instead of changing an existing import.
+The shared authority check requires every tag to resolve to its recorded commit and tree. Source files referenced by historical evidence are read directly from that tagged Git tree. They do not need duplicate copies on main.
 
-Legacy commit identifiers embedded in historical evidence remain documented strings. Some identifiers belong to private staging histories and do not resolve in the public repository graph. Consolidation does not rewrite those records or pretend the commits are public.
+Current rung directories contain only numerical assets needed by the shared verifier or public demonstration. Each nominal, witness, gate record, and proof payload keeps its recorded SHA-256 identity.
 
-The source repositories remain available after import. The consolidated repository adds a checked index and does not erase their independent history.
+Historical perturbation records remain unchanged. A stale path, failed controller leg, or unavailable private commit stays visible as historical evidence instead of being rewritten.
 
-n=13 includes tracked files under its capsule-level .working directory. Those files are evidence. The root ignore rule applies only to /.working/ and must never hide nested capsule evidence.
-
-n=14 locks source and metadata paths, including its lockfile, documentation, tests, and retained workflow. Those files remain unchanged inside the capsule.
+n=13 retains the controller and composed-proof payloads needed for replay. n=14 retains its witness, expected metrics, manifests, provenance, and host-of-record verification. Their historical source closures remain available at the corresponding legacy tags.

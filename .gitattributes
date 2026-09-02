@@ -1,0 +1,12 @@
+* text=auto
+.gitattributes text eol=lf
+
+# Numerical and historical evidence must retain exact bytes on every host.
+rungs/** -text
+
+# Shared source and configuration use LF.
+*.py text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+README.md text eol=lf
+*.yml text eol=lf

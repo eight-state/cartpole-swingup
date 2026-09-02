@@ -1,13 +1,15 @@
-# Scratch space. Root-scoped on purpose: a capsule's own .working directory,
-# if one exists, is capsule content and must never be ignored from here.
+# Scratch space. Existing n=13 proof payloads remain tracked.
 /.working/
+rungs/**/.working/
 
-# Build output, root only.
+# Build output and environments.
 /dist/
-
-# Environments and tooling caches. Never evidence, never commit.
 .venv/
+*.egg-info/
+
+# Tool caches.
 __pycache__/
 *.py[cod]
+.mypy_cache/
 .pytest_cache/
 .ruff_cache/

@@ -1,9 +1,7 @@
 HOST SENSITIVITY
 
-Byte and hash checks are portable. Numerical replay can depend on the operating system, Python build, numerical libraries, and processor behavior.
+Git tags and file hashes are portable. Numerical replay can depend on the operating system, Python build, numerical libraries, and processor behavior.
 
-Quoted floating-point values are release-host observations unless a capsule states otherwise. Trailing digits are not treated as portable evidence.
+The repository uses one lockfile with the numerical versions shared by the standalone releases. This removes dependency drift between rungs but does not make floating-point trajectories platform-independent.
 
-The registry runs each capsule with its own lockfile and verification command. It does not weaken tolerances, suppress failures, or claim that a passing authority audit certifies a host-sensitive trajectory.
-
-n=5 through n=11 use their published Linux CI boundary. n=12 through n=14 use their published Windows CI boundary. n=14 CI checks authority without claiming that the hosted runner certifies its retained numerical trajectory.
+CI runs n=5 through n=11 on Linux and n=12 through n=14 on Windows, matching their published release boundaries. A host-sensitive replay failure does not erase a passing tag and evidence audit, and an authority pass does not certify a trajectory on a different host.

@@ -1,4 +1,0 @@
-* text=auto eol=lf
-*.gif -text
-*.npz -text
-src/n12_cartpole/fast_pieces.py text eol=crlf

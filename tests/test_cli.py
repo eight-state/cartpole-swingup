@@ -1,49 +1,48 @@
 from __future__ import annotations
 
-from pathlib import Path
-from types import SimpleNamespace
+from typing import Any
 
-from conftest import create_capsule
+import pytest
 
-from cartpole_capsules.cli import main, verification_steps
-
-
-def test_list_empty_registry(registry_root: Path, capsys: object) -> None:
-    assert main(("--root", str(registry_root), "list")) == 0
-    assert "No capsules registered." in capsys.readouterr().out
+from cartpole_capsules import cli
 
 
-def test_check_reports_count(registry_root: Path, capsys: object) -> None:
-    create_capsule(registry_root)
-    assert main(("--root", str(registry_root), "check")) == 0
-    assert "Verified 1 registered capsule(s)." in capsys.readouterr().out
+def test_list_reports_all_rungs(capsys: pytest.CaptureFixture[str]) -> None:
+    assert cli.main(("list",)) == 0
+    output = capsys.readouterr().out
+    assert "n=5" in output
+    assert "n=14" in output
+    assert "n=15" not in output
 
 
-def test_verification_steps_are_locked_then_capsule_command(registry_root: Path) -> None:
-    entry = create_capsule(registry_root)
-    assert verification_steps(entry) == (
-        ("uv", "sync", "--locked"),
-        ("uv", "run", "n5-verify"),
-    )
+def test_check_uses_shared_authority_for_every_rung(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    calls: list[int] = []
+
+    def fake_check(config: Any) -> dict[str, Any]:
+        calls.append(config.rung)
+        return {"banked_gates": {"files": []}}
+
+    monkeypatch.setattr(cli, "check_rung_authority", fake_check)
+    assert cli.main(("check",)) == 0
+    assert calls == list(range(5, 15))
+    assert "n=14: authority PASS" in capsys.readouterr().out
 
 
-def test_verify_runs_two_safe_subprocesses(registry_root: Path, monkeypatch: object) -> None:
-    entry = create_capsule(registry_root)
-    calls: list[tuple[tuple[str, ...], Path, bool]] = []
+def test_verify_all_uses_one_shared_entry_point(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[tuple[int, bool]] = []
 
-    def fake_run(command: tuple[str, ...], *, cwd: Path, check: bool) -> SimpleNamespace:
-        calls.append((command, cwd, check))
-        return SimpleNamespace(returncode=0)
+    def fake_verify(config: Any, *, no_replay: bool) -> dict[str, Any]:
+        calls.append((config.rung, no_replay))
+        return {"verdict": "AUDITED"}
 
-    monkeypatch.setattr("cartpole_capsules.cli.subprocess.run", fake_run)
-    assert main(("--root", str(registry_root), "verify", "5")) == 0
-    expected_directory = registry_root / entry.capsule_path
-    assert calls == [
-        (("uv", "sync", "--locked"), expected_directory, False),
-        (("uv", "run", "n5-verify"), expected_directory, False),
-    ]
+    monkeypatch.setattr(cli, "verify_rung", fake_verify)
+    monkeypatch.setattr(cli, "_write_json", lambda path, value: None)
+    assert cli.main(("verify", "all", "--audit-only")) == 0
+    assert calls == [(rung, True) for rung in range(5, 15)]
 
 
-def test_verify_unknown_rung_fails(registry_root: Path, capsys: object) -> None:
-    assert main(("--root", str(registry_root), "verify", "15")) == 1
-    assert "no capsule registered for n=15" in capsys.readouterr().out
+def test_verify_unknown_rung_fails(capsys: pytest.CaptureFixture[str]) -> None:
+    assert cli.main(("verify", "15")) == 1
+    assert "unknown rung 15" in capsys.readouterr().out
