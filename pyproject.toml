@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cartpole-capsules"
+version = "0.1.0"
+description = "Registry and verification tooling for immutable CartPole swing-up capsules."
+readme = "README.md"
+requires-python = ">=3.12, <3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Eight State" }]
+
+[project.scripts]
+cartpole-capsule = "cartpole_capsules.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.2",
+    "ruff==0.15.21",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cartpole_capsules"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

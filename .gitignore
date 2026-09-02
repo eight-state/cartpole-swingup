@@ -1,0 +1,13 @@
+# Scratch space. Root-scoped on purpose: a capsule's own .working directory,
+# if one exists, is capsule content and must never be ignored from here.
+/.working/
+
+# Build output, root only.
+/dist/
+
+# Environments and tooling caches. Never evidence, never commit.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/

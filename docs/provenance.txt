@@ -1,0 +1,13 @@
+PROVENANCE POLICY
+
+Each manifest entry records the public source repository, source commit, source tree, imported path, filesystem digest, and file count.
+
+An imported capsule is immutable. Its source, lockfile, tests, workflows, documentation, numerical artifacts, and tracked scratch paths stay byte-for-byte together. A correction creates a new capsule generation instead of changing an existing import.
+
+Legacy commit identifiers embedded in historical evidence remain documented strings. Some identifiers belong to private staging histories and do not resolve in the public repository graph. Consolidation does not rewrite those records or pretend the commits are public.
+
+The source repositories remain available after import. The consolidated repository adds a checked index and does not erase their independent history.
+
+n=13 includes tracked files under its capsule-level .working directory. Those files are evidence. The root ignore rule applies only to /.working/ and must never hide nested capsule evidence.
+
+n=14 locks source and metadata paths, including its lockfile, documentation, tests, and retained workflow. Those files remain unchanged inside the capsule.
