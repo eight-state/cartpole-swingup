@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.ruff_cache/
+# stray local logs at repo root (shipped solve logs live in results/)
+/*.log
+MY_*.log
+
+.working/

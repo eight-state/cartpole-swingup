@@ -1,0 +1,5 @@
+* text=auto eol=lf
+
+# Frozen release evidence must retain Git's exact bytes on every platform.
+runs/r2/** -text
+runs/r2/*.json whitespace=cr-at-eol

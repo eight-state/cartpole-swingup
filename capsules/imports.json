@@ -84,6 +84,20 @@
       "demo_command": "uv run n10-demo",
       "runner": "ubuntu-latest",
       "evidence_class": "historical-ledger-audit+fresh-rerun"
+    },
+    {
+      "rung": 11,
+      "slug": "n11-undecuple",
+      "source_url": "https://github.com/eight-state/undecuple-cartpole",
+      "source_commit": "fea0c4e1d5ed1f75e4002a18f4d0b09f59a613d7",
+      "source_tree": "03e0b7d74ec04e0ef56ac06586761d708a464602",
+      "capsule_path": "capsules/n11-undecuple",
+      "content_hash": "13b864eb8dec3d36bf8fac5c28b935eb60092e53a279c8531a311d567c041d83",
+      "file_count": 24,
+      "verification_command": "uv run n11-verify",
+      "demo_command": "uv run n11-demo",
+      "runner": "ubuntu-latest",
+      "evidence_class": "historical-ledger-audit+fresh-rerun"
     }
   ]
 }
