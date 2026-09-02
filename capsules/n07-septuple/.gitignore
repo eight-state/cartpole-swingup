@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+# ignored local reproduction artifacts
+.working/
+
+# stray local logs
+*.log
+MY_*.log

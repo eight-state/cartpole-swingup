@@ -1,0 +1,72 @@
+{
+  "expected_witness": {
+    "all_assertions_pass": true,
+    "failures": []
+  },
+  "failures": [],
+  "integrity": {
+    "artifact_sha256": "f10fc56e854050e6091f0ac7ce406772875ab70f38829d2a177d134e97ed0b29",
+    "artifact_sha256_matches": true,
+    "source_sha256": {
+      "src/cartpole_race/__init__.py": "338d2ee651a473ae73e2a876a23783a92c1f128976d2047567392a1a65641cd9",
+      "src/cartpole_race/dynamics.py": "6c2109c60bbbb64edf7995765566d595b0790a62a7b43ebda233f889f17e7b46",
+      "src/cartpole_race/env_spec.py": "bb0a6b1c41403ee712b6ab0888c9b03486e327f0adba2a554bf072a989ce318d",
+      "src/n14_cartpole/success.py": "d976f237ae93d829bb52d1cf7c1d94335fc362130696ff7445042104fb032aca"
+    },
+    "source_sha256_matches": true
+  },
+  "locked_contract": {
+    "cart_mass_kg": 1.0,
+    "control_dt_s": 0.001,
+    "force_bound_n": 150.0,
+    "link_length_m": 0.5,
+    "link_mass_kg": 0.1,
+    "n_links": 14,
+    "required_success_states": 5001,
+    "rk4_substep_s": 0.00025,
+    "success_bounds": {
+      "max_abs_cart_m": 2.0,
+      "max_abs_cart_rate_m_s": 0.5,
+      "max_link_rate_rad_s": 0.5,
+      "max_wrapped_link_angle_deg": 5.0
+    },
+    "track_bound_m": 10.0
+  },
+  "metadata": {
+    "control_dt_s": 0.001,
+    "force_bound_n": 150.0,
+    "n": 14,
+    "rk4_substep_s": 0.00025,
+    "sole_parent_sha256": "fffb9466ee0be82646867ed6c8f13748827a2d157144eb0c81cfe642fc0a005b",
+    "source_fullmass_sha256": "4d1c722e527a62c6989b69d9550e6e22b98211619515c3e476086bfc48a06799",
+    "switch_tick": 6009,
+    "track_bound_m": 10.0
+  },
+  "metrics": {
+    "control_count": 22009,
+    "duration_s": 22.009,
+    "final": {
+      "cart_position_m": 9.858553224730684e-09,
+      "cart_rate_m_s": -2.5878735151479886e-08,
+      "in_success_set": true,
+      "max_link_rate_rad_s": 2.922550997057449e-09,
+      "max_wrapped_link_angle_deg": 2.3396954103294122e-07
+    },
+    "longest_success_first_tick": 8199,
+    "longest_success_s": 13.81,
+    "longest_success_states": 13811,
+    "nonfinite_state_tick": null,
+    "peak_force_n": 87.54201341513544,
+    "quarter_cart_peak_m": 7.098485449991383,
+    "start_max_abs_from_exact_hanging": 0.0,
+    "state_count": 22010
+  },
+  "release": "N14",
+  "runtime": {
+    "numpy": "2.4.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "schema_version": 1,
+  "verdict": "PASS"
+}

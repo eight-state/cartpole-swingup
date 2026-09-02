@@ -1,0 +1,221 @@
+{
+ "controller": "fixed_nominal_tvlqr_no_replan",
+ "n_success": 8,
+ "n_ic": 24,
+ "seed": 12345,
+ "commit_sha": "5d3c2a7e7386e9b1477960436d0fc0e1a9794ad4",
+ "git_dirty": false,
+ "nominal_sha256": "dd3e64c87485649feb59d0cf2ded147732d70e955ce131911e41b96c22b20892",
+ "max_force_demanded_over_runs": 138089970.63,
+ "n_saturated_ics": 16,
+ "results": [
+  {
+   "tag": 0,
+   "success": true,
+   "peakF": 77.61,
+   "max_force_demanded": 77.61,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 1,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 121304562.976,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 2,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 118429995.595,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 3,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 96996796.435,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 4,
+   "success": true,
+   "peakF": 77.685,
+   "max_force_demanded": 77.685,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 5,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 122285592.472,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 6,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 90282707.47,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 7,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 67854304.577,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 8,
+   "success": true,
+   "peakF": 77.719,
+   "max_force_demanded": 77.719,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 9,
+   "success": true,
+   "peakF": 77.714,
+   "max_force_demanded": 77.714,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 10,
+   "success": true,
+   "peakF": 77.734,
+   "max_force_demanded": 77.734,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 11,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 114872819.129,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 12,
+   "success": true,
+   "peakF": 77.754,
+   "max_force_demanded": 77.754,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 13,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 109286977.996,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 14,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 132345245.251,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 15,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 112351006.838,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 16,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 101727573.578,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 17,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 127097021.263,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 18,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 133352256.626,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 19,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 104242273.579,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 20,
+   "success": true,
+   "peakF": 77.703,
+   "max_force_demanded": 77.703,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 21,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 111378196.765,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  },
+  {
+   "tag": 22,
+   "success": true,
+   "peakF": 77.746,
+   "max_force_demanded": 77.746,
+   "saturated": false,
+   "track_ok": true
+  },
+  {
+   "tag": 23,
+   "success": false,
+   "peakF": 150.0,
+   "max_force_demanded": 138089970.63,
+   "saturated": true,
+   "track_ok": false,
+   "fail_stage": "hold"
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Sync the pinned environment
+        run: uv sync --locked
+      - name: Lint active code
+        run: uv run ruff check .
+      - name: Run focused tests
+        run: uv run python -m pytest -q
+      - name: Run the fresh demo
+        run: uv run n7-demo
+      - name: Verify the release evidence
+        run: uv run n7-verify

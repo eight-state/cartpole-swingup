@@ -1,0 +1,9 @@
+HOST SENSITIVITY
+
+Byte and hash checks are portable. Numerical replay can depend on the operating system, Python build, numerical libraries, and processor behavior.
+
+Quoted floating-point values are release-host observations unless a capsule states otherwise. Trailing digits are not treated as portable evidence.
+
+The registry runs each capsule with its own lockfile and verification command. It does not weaken tolerances, suppress failures, or claim that a passing authority audit certifies a host-sensitive trajectory.
+
+n=5 through n=11 use their published Linux CI boundary. n=12 through n=14 use their published Windows CI boundary. n=14 CI checks authority without claiming that the hosted runner certifies its retained numerical trajectory.

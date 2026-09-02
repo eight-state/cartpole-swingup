@@ -1,0 +1,19 @@
+CARTPOLE CAPSULE TERMS
+
+Success
+  A committed sampled predicate passed. Thresholds, force handling, and the hold metric remain part of each capsule's contract.
+
+Proof
+  One deterministic run passed a fixed verifier. This repository contains no mathematical proof of stability, robustness, reachability, or a region of attraction.
+
+Historical evidence
+  Frozen records from an earlier run. A verifier can check bytes, hashes, arithmetic, and internal consistency without rerunning the original trials.
+
+Exact
+  The word is qualified where used. It can describe byte-identical replay, exact zero-order-hold discretization, or an exact equilibrium start.
+
+Reproducible
+  A documented command reproduces the capsule's stated check within its dependency and numerical-host boundary. Trailing floating-point digits are release-host values unless the capsule establishes a stronger guarantee.
+
+Unperturbed
+  No external disturbance or model mismatch was added to that run. It is not a robustness claim.

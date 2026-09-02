@@ -1,0 +1,10 @@
+.venv/
+.env
+.env.*
+!.env.example
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.working/
+__pycache__/
+*.py[cod]
