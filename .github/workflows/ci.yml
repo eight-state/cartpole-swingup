@@ -9,9 +9,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   root:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -32,16 +36,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {rung: 5, runner: ubuntu-latest}
-          - {rung: 6, runner: ubuntu-latest}
-          - {rung: 7, runner: ubuntu-latest}
-          - {rung: 8, runner: ubuntu-latest}
-          - {rung: 9, runner: ubuntu-latest}
-          - {rung: 10, runner: ubuntu-latest}
-          - {rung: 11, runner: ubuntu-latest}
-          - {rung: 12, runner: windows-latest}
-          - {rung: 13, runner: windows-latest}
-          - {rung: 14, runner: windows-latest}
+          - {rung: 5, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 6, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 7, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 8, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 9, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 10, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 11, runner: blacksmith-2vcpu-ubuntu-2404}
+          - {rung: 12, runner: blacksmith-4vcpu-windows-2025}
+          - {rung: 13, runner: blacksmith-4vcpu-windows-2025}
+          - {rung: 14, runner: blacksmith-4vcpu-windows-2025}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
